@@ -1,0 +1,57 @@
+.profile {
+  display: flex;
+  margin: 0 200px 50px 200px;
+  font-family: "inter";
+  align-items: center;
+}
+
+.profile__avatar {
+  max-width: 168.75px;
+  border-radius: 50%;
+  width: 100%;
+}
+
+.profile__info {
+  display: flex;
+  max-width: 415px;
+  color: white;
+  margin: 22px 165px 21px 30px;
+}
+
+.profile__text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.profile__text_header {
+  flex-direction: row;
+  font-size: 42px;
+  line-height: 48px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.profile__text_subheader {
+  font-size: 18px;
+  line-height: 21.78px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.edit__button {
+  background: none;
+  background-image: url("/images/Edit\ Button.svg");
+  border: none;
+  width: 24px;
+  height: 24px;
+  margin-top: 15px;
+  margin-left: 18px;
+}
+
+.add__button {
+  background: none;
+  background-image: url("/images/Add\ Button.svg");
+  border: none;
+  width: 150px;
+  height: 50px;
+}
