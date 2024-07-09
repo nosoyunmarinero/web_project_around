@@ -1,6 +1,7 @@
 .header {
   display: flex;
-  max-width: 1280px;
+  max-width: 880px;
+  width: 100%;
   margin: 45px 200px 40px 200px;
   padding-bottom: 41px;
   border-bottom: 1px solid #545454;
@@ -12,10 +13,17 @@
   width: 100%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 880px) {
   .header {
-    margin: 45px 100px 40px 100px;
+    max-width: 600px;
+    margin: 45px 200px 40px 200px;
     padding-bottom: 41px;
+  }
+
+  .header__logo {
+    margin-left: 20px;
+    max-width: 150px;
+    width: 100%;
   }
 }
 
