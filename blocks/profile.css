@@ -119,6 +119,12 @@
   margin-bottom: 1rem;
 }
 
+@media screen and (max-width: 590px) {
+  .profile__about {
+    padding-bottom: 36px;
+  }
+}
+
 @media screen and (max-width: 880px) {
   .header {
     width: 282px;

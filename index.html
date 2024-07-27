@@ -27,19 +27,53 @@
       <!--CONTENT-->
       <main class="content">
         <!--Profile-->
-        <section class="profile">
+        <section class="profile" id="profile">
           <img
             src="./images/image-profile.png"
             alt="Imagen de perfil."
             class="profile__avatar"
           />
           <div class="profile__info">
-            <h2 class="profile__name">Jacques Cousteau</h2>
-            <h3 class="profile__about">Explorador</h3>
-            <button class="profile__edit-button"></button>
+            <h2 class="profile__name" id="profile-name">Jacques Cousteau</h2>
+            <h3 class="profile__about" id="profile-job">Explorador</h3>
+            <button id="edit-button-open" class="profile__edit-button"></button>
           </div>
           <button class="profile__add-button">+</button>
         </section>
+
+        <!--Profile Edit Form-->
+        <dialog id="modal">
+          <button class="profile__close-button">
+            <img
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              id="edit-button-close"
+              class="profile__close-icon"
+            />
+          </button>
+          <form class="profile__edit-form" id="profile-form">
+            <header class="profile__edit-form-header">Editar Perfil</header>
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_name"
+              placeholder="Nombre"
+              id="name"
+            />
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_job"
+              placeholder="Acerca de mí"
+              id="job"
+            />
+            <button
+              id="save-button"
+              class="profile__edit-form-button profile__edit-form-button_save"
+            >
+              Guardar
+            </button>
+          </form>
+        </dialog>
+
         <!--Elements-->
         <section class="elements">
           <div class="element">
@@ -47,7 +81,7 @@
             <div class="element__description">
               <p>Valle de Yosemite</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img src="/images/heart.svg" alt="Like button" id="heart-off" />
               </button>
             </div>
           </div>
@@ -60,7 +94,11 @@
             <div class="element__description">
               <p>Lago Louise</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-2"
+                />
               </button>
             </div>
           </div>
@@ -73,7 +111,11 @@
             <div class="element__description">
               <p>Montañas Calvas</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-3"
+                />
               </button>
             </div>
           </div>
@@ -86,7 +128,11 @@
             <div class="element__description">
               <p>Latemar</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-4"
+                />
               </button>
             </div>
           </div>
@@ -99,7 +145,11 @@
             <div class="element__description">
               <p>Vanois National Park</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-5"
+                />
               </button>
             </div>
           </div>
@@ -112,7 +162,11 @@
             <div class="element__description">
               <p>Lago di Braies</p>
               <button class="element__button">
-                <img src="/images/heart.svg" alt="Like button" />
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-6"
+                />
               </button>
             </div>
           </div>
@@ -122,5 +176,5 @@
       </main>
     </div>
   </body>
-  <script src="script.js"></script>
+  <script src="/js/script.js"></script>
 </html>
