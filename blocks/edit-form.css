@@ -20,9 +20,6 @@ dialog {
 
 .profile__close-button {
   position: absolute;
-}
-
-.profile__close-button {
   display: flex;
   top: -40px;
   right: -40px;
@@ -90,4 +87,30 @@ dialog {
 
 .profile__edit-form-button_save:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 320px) {
+  dialog {
+    max-width: 282px;
+  }
+
+  .profile__edit-form-button {
+    padding: 14px 92px;
+    max-width: 238px;
+    align-items: center;
+
+    font-size: 14px;
+  }
+
+  .profile__edit-form-header {
+    font-size: 18px;
+  }
+  .profile__close-button {
+    top: -45px;
+    right: 0;
+  }
+
+  .profile__close-icon {
+    max-width: 24px;
+  }
 }

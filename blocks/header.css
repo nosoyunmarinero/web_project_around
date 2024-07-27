@@ -31,13 +31,15 @@
   .header {
     max-width: 320px;
     width: 100%;
-    margin: 28px 0 41px 0;
-    padding-bottom: 41px;
+    margin: 0 0 0 0;
+    padding: 0;
   }
 
   .header__logo {
+    margin-top: 28px;
     margin-left: 27px;
     max-width: 126px;
     width: 100%;
+    padding: 0;
   }
 }

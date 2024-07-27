@@ -63,6 +63,10 @@ function handleProfileFormSubmit(evt) {
   profileJob.textContent = jobValue;
 
   profileEdit.close();
+  document.querySelector(".header").style.opacity = "1";
+  document.querySelector(".profile").style.opacity = "1";
+  document.querySelector(".elements").style.opacity = "1";
+  document.querySelector(".footer").style.opacity = "1";
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
