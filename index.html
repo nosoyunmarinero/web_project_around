@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Francisco R.V" />
+    <meta
+      name="keywords"
+      content="Tripleten, Paisajes, Web, Red Social, Fotografía"
+    />
+    <meta name="description" content="Proyecto Sprint 7 para Tripleten" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>Around The U.S.</title>
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="header">
+        <img
+          src="./images/header-logo.svg"
+          alt="Logo Around the U.S."
+          class="header__logo"
+        />
+      </header>
+
+      <!--CONTENT-->
+      <main class="content">
+        <!--Profile-->
+        <section class="profile" id="profile">
+          <img
+            src="./images/image-profile.png"
+            alt="Imagen de perfil."
+            class="profile__avatar"
+          />
+          <div class="profile__info">
+            <h2 class="profile__name" id="profile-name">Jacques Cousteau</h2>
+            <h3 class="profile__about" id="profile-job">Explorador</h3>
+            <button id="edit-button-open" class="profile__edit-button"></button>
+          </div>
+          <button class="profile__add-button">+</button>
+        </section>
+
+        <!--Profile Edit Form-->
+        <dialog id="modal">
+          <button class="profile__close-button">
+            <img
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              id="edit-button-close"
+              class="profile__close-icon"
+            />
+          </button>
+          <form class="profile__edit-form" id="profile-form">
+            <header class="profile__edit-form-header">Editar Perfil</header>
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_name"
+              placeholder="Nombre"
+              id="name"
+            />
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_job"
+              placeholder="Acerca de mí"
+              id="job"
+            />
+            <button
+              id="save-button"
+              class="profile__edit-form-button profile__edit-form-button_save"
+            >
+              Guardar
+            </button>
+          </form>
+        </dialog>
+
+        <!--Elements-->
+        <section class="elements">
+          <div class="element">
+            <img src="/images/img1.png" alt="Imagen 1" class="element__image" />
+            <div class="element__description">
+              <p>Valle de Yosemite</p>
+              <button class="element__button">
+                <img src="/images/heart.svg" alt="Like button" id="heart-off" />
+              </button>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="/images/img2.png"
+              alt="Descripción de la imagen 2"
+              class="element__image"
+            />
+            <div class="element__description">
+              <p>Lago Louise</p>
+              <button class="element__button">
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-2"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="/images/img3.png"
+              alt="Descripción de la imagen 3"
+              class="element__image"
+            />
+            <div class="element__description">
+              <p>Montañas Calvas</p>
+              <button class="element__button">
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-3"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="/images/img4.jpg"
+              alt="Descripción de la imagen 4"
+              class="element__image"
+            />
+            <div class="element__description">
+              <p>Latemar</p>
+              <button class="element__button">
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-4"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="/images/img5.jpg"
+              alt="Descripción de la imagen 5"
+              class="element__image"
+            />
+            <div class="element__description">
+              <p>Vanois National Park</p>
+              <button class="element__button">
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-5"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="/images/img6.jpg"
+              alt="Descripción de la imagen 6"
+              class="element__image"
+            />
+            <div class="element__description">
+              <p>Lago di Braies</p>
+              <button class="element__button">
+                <img
+                  src="/images/heart.svg"
+                  alt="Like button"
+                  id="heart-off-6"
+                />
+              </button>
+            </div>
+          </div>
+        </section>
+        <!--Footer-->
+        <footer class="footer">© 2021 Around The U.S.</footer>
+      </main>
+    </div>
+  </body>
+  <script src="/js/script.js"></script>
+</html>
