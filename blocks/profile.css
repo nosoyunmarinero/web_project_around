@@ -65,7 +65,7 @@
   padding: 0;
   width: 24px;
   height: 24px;
-  background-image: url(./images/Edit\ Button.svg);
+  background-image: url("./images/Edit-Button.svg");
   box-sizing: border-box;
   background-size: contain;
   align-self: start;
