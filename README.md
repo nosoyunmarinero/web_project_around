@@ -27,4 +27,4 @@ En este proyecto se utilizaron las siguientes tecnologías y técnicas:
 - **Git**: Para el control de versiones y gestión de ramas, permitiendo un desarrollo organizado y colaborativo.
 
 
-Pagina de Github Pages:
+Pagina de Github Pages: https://nosoyunmarinero.github.io/web_project_around/
