@@ -79,7 +79,7 @@ likeButtons.forEach((button) => {
     const heartIcon = button.querySelector("img");
 
     if (heartIcon.src.includes("heart.svg")) {
-      heartIcon.src = "../images/heartOn.svg";
+      heartIcon.src = "../images/heart-on.svg";
     } else {
       heartIcon.src = "../images/heart.svg";
     }
