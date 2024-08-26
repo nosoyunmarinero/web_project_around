@@ -1,4 +1,4 @@
-/* Scrip para abir el edit form*/
+/* Scrip para abir el edit form
 const editButtonOpen = document.querySelector("#edit-button-open");
 const editButtonClose = document.querySelector("#edit-button-close");
 const profileEdit = document.querySelector("#modal");
@@ -27,7 +27,38 @@ editButtonClose.addEventListener("click", () => {
   document.querySelector(".footer").style.opacity = "1";
 });
 
-/* Scrip color del boton Guardar */
+
+/* Funcion para abrir dialog */
+
+function openDialog(dialogID) {
+  const dialog = document.getElementById(dialogID);
+  if (dialog) {
+    dialog.showModal();
+    opacityPage(true);
+  }
+}
+
+/* Funcion cerrar dialog */
+
+function closeDialog(dialogID) {
+  const dialog = document.getElementById(dialogID);
+  if (dialog) {
+    dialog.close();
+    opacityPage(false);
+  }
+}
+
+/* Funcion oscurecer pagina */
+function opacityPage(dim) {
+  const elements = document.querySelectorAll(
+    ".profile, .header, .elements, .footer"
+  );
+  elements.forEach((element) => {
+    element.style.opacity = dim ? "0.5" : "1";
+  });
+}
+
+/* Funcion color del boton Guardar */
 const inputFieldName = document.querySelector(".profile__edit-form-input_name");
 const inputFieldJob = document.querySelector(".profile__edit-form-input_job");
 const saveButton = document.getElementById("save-button");
@@ -80,4 +111,9 @@ likeButtons.forEach((button) => {
       heartIcon.src = "/images/heart.svg";
     }
   });
+});
+
+/* Profile edit */
+document.getElementById("edit-button-open").addEventListener("click", () => {
+  openDialog("modal-profile");
 });
