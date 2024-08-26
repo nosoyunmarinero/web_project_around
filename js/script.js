@@ -13,6 +13,7 @@ editButtonOpen.addEventListener("click", () => {
   toggleSaveButton();
 
   profileEdit.show();
+
   document.querySelector(".header").style.opacity = "0.5";
   document.querySelector(".profile").style.opacity = "0.5";
   document.querySelector(".elements").style.opacity = "0.5";
@@ -33,7 +34,7 @@ editButtonClose.addEventListener("click", () => {
 function openDialog(dialogID) {
   const dialog = document.getElementById(dialogID);
   if (dialog) {
-    dialog.showModal();
+    dialog.show();
     opacityPage(true);
   }
 }
@@ -59,12 +60,12 @@ function opacityPage(dim) {
 }
 
 /* Funcion color del boton Guardar */
-const inputFieldName = document.querySelector(".profile__edit-form-input_name");
-const inputFieldJob = document.querySelector(".profile__edit-form-input_job");
-const saveButton = document.getElementById("save-button");
+function toggleSaveButton(input1ID, input2ID, saveButtonID) {
+  const inputField1 = document.getElementById(input1ID);
+  const inputField2 = document.getElementById(input2ID);
+  const saveButton = document.getElementById(saveButtonID);
 
-function toggleSaveButton() {
-  if (inputFieldName.value.trim() !== "" && inputFieldJob.value.trim() !== "") {
+  if (inputField1.value.trim() !== "" && inputField2.value.trim() !== "") {
     saveButton.style.backgroundColor = "black";
     saveButton.style.color = "white";
   } else {
@@ -72,10 +73,6 @@ function toggleSaveButton() {
     saveButton.style.color = "#c4c4c4";
   }
 }
-
-inputFieldName.addEventListener("input", toggleSaveButton);
-inputFieldJob.addEventListener("input", toggleSaveButton);
-toggleSaveButton();
 
 /* Scrip para cambiar info del perfil*/
 let formElement = document.querySelector("#profile-form");
@@ -114,6 +111,25 @@ likeButtons.forEach((button) => {
 });
 
 /* Profile edit */
+const profileEdit = {
+  open: openDialog,
+  close: closeDialog,
+  opacity: opacityPage,
+  colorButton: toggleSaveButton,
+};
+
 document.getElementById("edit-button-open").addEventListener("click", () => {
-  openDialog("modal-profile");
+  profileEdit.open("modal-profile");
+});
+
+document.getElementById("edit-button-close").addEventListener("click", () => {
+  profileEdit.close("modal-profile");
+});
+
+document.getElementById("name").addEventListener("input", () => {
+  profileEdit.colorButton("name", "job", "save-button");
+});
+
+document.getElementById("job").addEventListener("input", () => {
+  profileEdit.colorButton("name", "job", "save-button");
 });
