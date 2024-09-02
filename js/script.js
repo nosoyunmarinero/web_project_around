@@ -1,33 +1,33 @@
-/* Scrip para abir el edit form
-const editButtonOpen = document.querySelector("#edit-button-open");
-const editButtonClose = document.querySelector("#edit-button-close");
-const profileEdit = document.querySelector("#modal");
+/* Cards iniciales */
 
-const profileNameElement = document.getElementById("profile-name");
-const profileJobElement = document.getElementById("profile-job");
+const initialCards = [
+  {
+    name: "Valle de Yosemite",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+  },
+  {
+    name: "Lago Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+  },
+  {
+    name: "Montañas Calvas",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+  },
+  {
+    name: "Parque Nacional de la Vanoise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+  },
+];
 
-editButtonOpen.addEventListener("click", () => {
-  inputFieldName.value = profileNameElement.textContent;
-  inputFieldJob.value = profileJobElement.textContent;
-
-  toggleSaveButton();
-
-  profileEdit.show();
-
-  document.querySelector(".header").style.opacity = "0.5";
-  document.querySelector(".profile").style.opacity = "0.5";
-  document.querySelector(".elements").style.opacity = "0.5";
-  document.querySelector(".footer").style.opacity = "0.5";
-});
-
-editButtonClose.addEventListener("click", () => {
-  profileEdit.close();
-  document.querySelector(".header").style.opacity = "1";
-  document.querySelector(".profile").style.opacity = "1";
-  document.querySelector(".elements").style.opacity = "1";
-  document.querySelector(".footer").style.opacity = "1";
-});
-        <-------------------Funciones--------------------->
+/*  <-------------------Funciones--------------------->
 
 /* Funcion para abrir dialog */
 
@@ -91,6 +91,13 @@ function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
   displayField2.textContent = field2Value;
 }
 
+/* Función para agregar imagenes */
+function addImage(evt) {
+  evt.preventDefault();
+
+  const imageTitle = document.getElementById();
+}
+
 /*       <-------------------Codigo--------------------->        */
 
 /* Profile edit */
@@ -103,11 +110,11 @@ const profileEdit = {
 };
 
 document.getElementById("edit-button-open").addEventListener("click", () => {
-  profileEdit.open("modal-profile");
+  profileEdit.open("modal-edit");
 });
 
 document.getElementById("edit-button-close").addEventListener("click", () => {
-  profileEdit.close("modal-profile");
+  profileEdit.close("modal-edit");
 });
 
 document.getElementById("name").addEventListener("input", () => {
@@ -122,6 +129,39 @@ document
   .getElementById("save-button")
   .addEventListener("click", function (evt) {
     saveInfo(evt, "name", "job", "profile-name", "profile-job");
+    profileEdit.close("modal-edit");
+  });
+
+/*Profile Add */
+const profileAdd = {
+  open: openDialog,
+  close: closeDialog,
+  opacity: opacityPage,
+  colorButton: toggleSaveButton,
+  info: saveInfo,
+};
+
+document.getElementById("add-button-open").addEventListener("click", () => {
+  profileAdd.open("modal-add");
+});
+
+document.getElementById("add-button-close").addEventListener("click", () => {
+  profileAdd.close("modal-add");
+});
+
+document.getElementById("title").addEventListener("input", () => {
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+document.getElementById("imageURL").addEventListener("input", () => {
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+document
+  .getElementById("save-button-add")
+  .addEventListener("click", function (evt) {
+    saveInfo(evt, "name", "job", "profile-name", "profile-job");
+    profileAdd.close("modal-add");
   });
 
 /* Script para likear */

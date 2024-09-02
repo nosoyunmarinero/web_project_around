@@ -42,7 +42,7 @@
         </section>
 
         <!--Dialog Form-->
-        <dialog id="modal-profile">
+        <dialog id="modal-edit">
           <button class="profile__close-button">
             <img
               src="/images/Close Icon.svg"
@@ -151,6 +151,39 @@
             </div>
           </div>
         </section>
+
+        <!--Dialog Place-->
+        <dialog id="modal-add">
+          <button class="profile__close-button">
+            <img
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              id="add-button-close"
+              class="profile__close-icon"
+            />
+          </button>
+          <form class="profile__edit-form" id="profile-form">
+            <header class="profile__edit-form-header">Nuevo Lugar</header>
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_name"
+              placeholder="Titulo"
+              id="title"
+            />
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_job"
+              placeholder="URL de la imagen"
+              id="imageURL"
+            />
+            <button
+              id="save-button-add"
+              class="profile__edit-form-button profile__edit-form-button_save"
+            >
+              Guardar
+            </button>
+          </form>
+        </dialog>
         <!--Footer-->
         <footer class="footer">© 2021 Around The U.S.</footer>
       </main>
