@@ -27,7 +27,7 @@ editButtonClose.addEventListener("click", () => {
   document.querySelector(".elements").style.opacity = "1";
   document.querySelector(".footer").style.opacity = "1";
 });
-
+        <-------------------Funciones--------------------->
 
 /* Funcion para abrir dialog */
 
@@ -74,41 +74,24 @@ function toggleSaveButton(input1ID, input2ID, saveButtonID) {
   }
 }
 
-/* Scrip para cambiar info del perfil*/
-let formElement = document.querySelector("#profile-form");
-function handleProfileFormSubmit(evt) {
+/* Función para cambiar la información del perfil */
+function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
   evt.preventDefault();
-  let nameInput = document.getElementById("name");
-  let jobInput = document.getElementById("job");
 
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
+  const field1 = document.getElementById(field1ID);
+  const field2 = document.getElementById(field2ID);
 
-  let profileName = document.querySelector("#profile-name");
-  let profileJob = document.querySelector("#profile-job");
+  const field1Value = field1.value;
+  const field2Value = field2.value;
 
-  profileName.textContent = nameValue;
-  profileJob.textContent = jobValue;
+  const displayField1 = document.getElementById(displayField1ID);
+  const displayField2 = document.getElementById(displayField2ID);
 
-  profileEdit.close();
+  displayField1.textContent = field1Value;
+  displayField2.textContent = field2Value;
 }
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
-
-/* Scrip para corazon */
-const likeButtons = document.querySelectorAll(".element__button");
-
-likeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const heartIcon = button.querySelector("img");
-
-    if (heartIcon.src.includes("heart.svg")) {
-      heartIcon.src = "/images/heartOn.svg";
-    } else {
-      heartIcon.src = "/images/heart.svg";
-    }
-  });
-});
+/*       <-------------------Codigo--------------------->        */
 
 /* Profile edit */
 const profileEdit = {
@@ -116,6 +99,7 @@ const profileEdit = {
   close: closeDialog,
   opacity: opacityPage,
   colorButton: toggleSaveButton,
+  info: saveInfo,
 };
 
 document.getElementById("edit-button-open").addEventListener("click", () => {
@@ -132,4 +116,25 @@ document.getElementById("name").addEventListener("input", () => {
 
 document.getElementById("job").addEventListener("input", () => {
   profileEdit.colorButton("name", "job", "save-button");
+});
+
+document
+  .getElementById("save-button")
+  .addEventListener("click", function (evt) {
+    saveInfo(evt, "name", "job", "profile-name", "profile-job");
+  });
+
+/* Script para likear */
+const likeButtons = document.querySelectorAll(".element__button");
+
+likeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const heartIcon = button.querySelector("img");
+
+    if (heartIcon.src.includes("heart.svg")) {
+      heartIcon.src = "/images/heartOn.svg";
+    } else {
+      heartIcon.src = "/images/heart.svg";
+    }
+  });
 });
