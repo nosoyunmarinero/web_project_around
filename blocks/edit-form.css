@@ -29,7 +29,7 @@ dialog {
   background: none;
   border: none;
   cursor: pointer;
-  background-color: black;
+  background-color: transparent;
 }
 
 .profile__close-button:hover {

@@ -2,32 +2,55 @@
 
 const initialCards = [
   {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+    description: "Chichén Itzá",
+    link: "https://images.unsplash.com/photo-1568402102990-bc541580b59f?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+    description: "Monte Fuji",
+    link: "https://images.unsplash.com/photo-1570459027562-4a916cc6113f?q=80&w=988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+    description: "Tromsø",
+    link: "https://images.unsplash.com/photo-1669887961943-54dd571fb287?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+    description: "Bali",
+    link: "https://images.unsplash.com/photo-1532186651327-6ac23687d189?q=80&w=1049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+    description: "Brujas",
+    link: "https://images.unsplash.com/photo-1554413360-fa283dd6a1ec?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+    description: "Cholula",
+    link: "https://images.unsplash.com/photo-1667277310912-585fb643f7c8?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
 /*  <-------------------Funciones--------------------->
+
+/* Función para cargar las tarjetas iniciales */
+function loadInitialCards() {
+  const elementsSection = document.querySelector(".elements");
+  elementsSection.innerHTML = "";
+
+  initialCards.forEach((card) => {
+    const cardHTML = `
+      <div class="element">
+        <img src="${card.link}" alt="${card.description}" class="element__image" />
+        <div class="element__description">
+          <p>${card.description}</p>
+          <button class="element__button">
+            <img src="/images/heart.svg" alt="Like button" />
+          </button>
+        </div>
+      </div>
+    `;
+    elementsSection.innerHTML += cardHTML;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadInitialCards);
 
 /* Funcion para abrir dialog */
 
@@ -41,7 +64,7 @@ function openDialog(dialogID) {
 
 /* Funcion cerrar dialog */
 
-function closeDialog(dialogID) {
+function closeDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
   if (dialog) {
     dialog.close();
@@ -91,11 +114,30 @@ function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
   displayField2.textContent = field2Value;
 }
 
-/* Función para agregar imagenes */
-function addImage(evt) {
+/* Función para agregar cards */
+function addCard(evt, titleID, imageURLID) {
   evt.preventDefault();
 
-  const imageTitle = document.getElementById();
+  const title = document.getElementById(titleID).value;
+  const imageURL = document.getElementById(imageURLID).value;
+
+  const newCardHTML = `
+    <div class="element">
+      <img src="${imageURL}" alt="${title}" class="element__image" />
+      <div class="element__description">
+        <p>${title}</p>
+        <button class="element__button">
+          <img src="/images/heart.svg" alt="Like button" />
+        </button>
+      </div>
+    </div>
+  `;
+
+  document
+    .querySelector(".elements")
+    .insertAdjacentHTML("afterbegin", newCardHTML);
+
+  closeDialog("modal-add", "profile-form");
 }
 
 /*       <-------------------Codigo--------------------->        */
@@ -138,7 +180,7 @@ const profileAdd = {
   close: closeDialog,
   opacity: opacityPage,
   colorButton: toggleSaveButton,
-  info: saveInfo,
+  add: addCard,
 };
 
 document.getElementById("add-button-open").addEventListener("click", () => {
@@ -157,24 +199,32 @@ document.getElementById("imageURL").addEventListener("input", () => {
   profileAdd.colorButton("title", "imageURL", "save-button-add");
 });
 
-document
-  .getElementById("save-button-add")
-  .addEventListener("click", function (evt) {
-    saveInfo(evt, "name", "job", "profile-name", "profile-job");
-    profileAdd.close("modal-add");
-  });
+document.getElementById("save-button-add").addEventListener("click", (evt) => {
+  profileAdd.add(evt, "title", "imageURL");
+
+  const dialog = document.getElementById("modal-add");
+
+  const form = dialog.querySelector("form");
+  if (form) {
+    form.reset();
+  }
+
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
 
 /* Script para likear */
-const likeButtons = document.querySelectorAll(".element__button");
+document.addEventListener("DOMContentLoaded", () => {
+  const likeButtons = document.querySelectorAll(".element__button");
 
-likeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const heartIcon = button.querySelector("img");
+  likeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const heartIcon = button.querySelector("img");
 
-    if (heartIcon.src.includes("heart.svg")) {
-      heartIcon.src = "/images/heartOn.svg";
-    } else {
-      heartIcon.src = "/images/heart.svg";
-    }
+      if (heartIcon.src.includes("heartOn.svg")) {
+        heartIcon.src = "/images/heart.svg";
+      } else {
+        heartIcon.src = "/images/heartOn.svg";
+      }
+    });
   });
 });
