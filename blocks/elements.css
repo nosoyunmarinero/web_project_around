@@ -19,6 +19,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.element__button-image {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.element__button-image:hover {
+  opacity: 0.9;
+}
 .element__image {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
@@ -34,7 +45,7 @@
   cursor: pointer;
   position: absolute;
   right: 0;
-  padding: 7px;
+  padding: 15px;
 }
 
 .element__button-delete:hover {
@@ -42,7 +53,7 @@
 }
 
 .element__image-delete {
-  width: 26px;
+  width: 18px;
 }
 
 .element__description {

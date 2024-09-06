@@ -91,3 +91,24 @@ dialog {
 .profile__edit-form-button_save:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 590px) {
+  dialog {
+    max-width: 282px;
+  }
+  .profile__edit-form-input {
+    margin: 0 22px;
+  }
+
+  .profile__edit-form-input_name {
+    margin-bottom: 30px;
+  }
+  .profile__edit-form-input_job {
+    margin-bottom: 46px;
+  }
+  .profile__edit-form-button_save {
+    max-width: 238px;
+    display: flex;
+    justify-content: center;
+  }
+}

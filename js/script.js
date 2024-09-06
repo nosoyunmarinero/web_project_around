@@ -37,12 +37,14 @@ function loadInitialCards() {
   initialCards.forEach((card) => {
     const cardHTML = `
       <div class="element">
+      <button class="element__button-image" id="open-image">
         <img src="${card.link}" alt="${card.description}" class="element__image" />
+        </button>
           <button class="element__button-delete" id="delete-image">
             <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
           </button>
         <div class="element__description">
-          <p>${card.description}</p>
+          <p id="card-title">${card.description}</p>
             <button class="element__button">
               <img src="/images/heart.svg" alt="Like button" />
             </button>
@@ -126,12 +128,14 @@ function addCard(evt, titleID, imageURLID) {
 
   const newCardHTML = `
     <div class="element">
+    <button class="element__button-image" id="open-image">
       <img src="${imageURL}" alt="${title}" class="element__image" />
+      </button>
       <button class="element__button-delete" id="delete-image">
             <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
           </button>
       <div class="element__description">
-        <p>${title}</p>
+        <p id="card-title">${title}</p>
         <button class="element__button">
           <img src="/images/heart.svg" alt="Like button" />
         </button>
@@ -145,6 +149,16 @@ function addCard(evt, titleID, imageURLID) {
 
   closeDialog("modal-add", "profile-form");
 }
+
+/* Funcion para eliminar cards */
+function deleteCard(event) {
+  const cardToDelete = event.target.closest(".element");
+  if (cardToDelete) {
+    cardToDelete.remove();
+  }
+}
+
+/*Funcion para abrir imagenes*/
 
 /*       <-------------------Codigo--------------------->        */
 
@@ -216,6 +230,22 @@ document.getElementById("save-button-add").addEventListener("click", (evt) => {
   }
 
   profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+/* Profile delete*/
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".element__button-delete *")) {
+    deleteCard(event);
+  }
+});
+
+/*Profile show*/
+const profileShow = {
+  open: openDialog,
+};
+
+document.getElementById("open-image").addEventListener("click", () => {
+  profileShow.open("image-dialog");
 });
 
 /* Script para likear */
