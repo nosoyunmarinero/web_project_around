@@ -38,12 +38,15 @@ function loadInitialCards() {
     const cardHTML = `
       <div class="element">
         <img src="${card.link}" alt="${card.description}" class="element__image" />
+          <button class="element__button-delete" id="delete-image">
+            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+          </button>
         <div class="element__description">
           <p>${card.description}</p>
-          <button class="element__button">
-            <img src="/images/heart.svg" alt="Like button" />
-          </button>
-        </div>
+            <button class="element__button">
+              <img src="/images/heart.svg" alt="Like button" />
+            </button>
+          </div>
       </div>
     `;
     elementsSection.innerHTML += cardHTML;
@@ -124,6 +127,9 @@ function addCard(evt, titleID, imageURLID) {
   const newCardHTML = `
     <div class="element">
       <img src="${imageURL}" alt="${title}" class="element__image" />
+      <button class="element__button-delete" id="delete-image">
+            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+          </button>
       <div class="element__description">
         <p>${title}</p>
         <button class="element__button">
@@ -214,17 +220,15 @@ document.getElementById("save-button-add").addEventListener("click", (evt) => {
 
 /* Script para likear */
 document.addEventListener("DOMContentLoaded", () => {
-  const likeButtons = document.querySelectorAll(".element__button");
-
-  likeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const heartIcon = button.querySelector("img");
-
+  document.querySelector(".elements").addEventListener("click", (event) => {
+    const likeButton = event.target.closest(".element__button");
+    if (likeButton) {
+      const heartIcon = likeButton.querySelector("img");
       if (heartIcon.src.includes("heartOn.svg")) {
         heartIcon.src = "/images/heart.svg";
       } else {
         heartIcon.src = "/images/heartOn.svg";
       }
-    });
+    }
   });
 });

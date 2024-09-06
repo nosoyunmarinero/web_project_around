@@ -12,6 +12,7 @@
 .element {
   display: flex;
   flex-direction: column;
+  position: relative;
   background-color: #fff;
   max-width: 282px;
   border-radius: 10px;
@@ -19,8 +20,29 @@
 }
 
 .element__image {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
   max-width: 282px;
+  max-height: 282px;
   width: 100%;
+  object-fit: cover;
+}
+
+.element__button-delete {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  padding: 7px;
+}
+
+.element__button-delete:hover {
+  opacity: 0.6;
+}
+
+.element__image-delete {
+  width: 26px;
 }
 
 .element__description {
