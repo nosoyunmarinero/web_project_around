@@ -1,0 +1,26 @@
+.element__modal {
+  max-width: 816 px;
+  max-height: 540px;
+  position: fixed;
+  top: 90px;
+  bottom: 90px;
+
+  border-radius: 8px;
+  border: none;
+
+  padding: 0;
+  z-index: 3;
+}
+
+.element__modal::backdrop {
+  opacity: 0.5;
+}
+.element__modal-image {
+  max-height: 70vh;
+}
+
+.element__modal-title {
+  color: white;
+  font-family: "inter", sans-serif;
+  font-weight: 291;
+}
