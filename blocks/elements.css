@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
   background-color: #fff;
   max-width: 282px;
   border-radius: 10px;
@@ -20,10 +21,12 @@
 }
 
 .element__button-image {
-  border: none;
+  width: 100%;
+  height: 100%;
   padding: 0;
-  background-color: transparent;
-  border-radius: 10px;
+  border: none;
+  background: none;
+  overflow: hidden;
   cursor: pointer;
 }
 
@@ -36,7 +39,10 @@
   max-width: 282px;
   max-height: 282px;
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  object-position: center;
 }
 
 .element__button-delete {

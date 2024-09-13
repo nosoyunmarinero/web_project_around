@@ -42,7 +42,7 @@
         </section>
 
         <!--Dialog Form-->
-        <dialog id="modal-edit">
+        <dialog id="modal-edit" class="dialog-general">
           <button class="profile__close-button">
             <img
               src="/images/Close Icon.svg"
@@ -153,8 +153,8 @@
         </section>
 
         <!--Dialog Place-->
-        <dialog id="modal-add">
-          <button class="profile__close-button">
+        <dialog id="modal-add" class="dialog-general">
+          <button class="element__close-button">
             <img
               src="/images/Close Icon.svg"
               alt="Cerrar"
@@ -183,23 +183,23 @@
               Crear
             </button>
           </form>
-          <!--Dialog Image-->
-          <dialog id="modal-image">
-            <button class="profile__close-button" id="dialog-close-button">
-              <img
-                src="/images/Close Icon.svg"
-                alt="Cerrar"
-                class="profile__close-icon"
-              />
-            </button>
+        </dialog>
+        <!--Dialog Image-->
+        <dialog id="modal-image" class="element__modal">
+          <button class="element__close-button" id="dialog-close-button">
             <img
-              id="dialog-image"
-              src=""
-              alt="Imagen bontia"
-              class="element__modal-image"
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              class="profile__close-icon"
             />
-            <p id="dialog-title" class="element__modal-title"></p>
-          </dialog>
+          </button>
+          <img
+            id="dialog-image"
+            src=""
+            alt="Imagen bonita"
+            class="element__modal-image"
+          />
+          <p id="dialog-title" class="element__modal-title"></p>
         </dialog>
         <!--Footer-->
         <footer class="footer">© 2021 Around The U.S.</footer>

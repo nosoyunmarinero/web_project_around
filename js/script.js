@@ -147,6 +147,14 @@ function addCard(evt, titleID, imageURLID) {
     .querySelector(".elements")
     .insertAdjacentHTML("afterbegin", newCardHTML);
 
+  setupImageModal(
+    ".element__button-image",
+    "#modal-image",
+    "#dialog-image",
+    "#dialog-title",
+    "#dialog-close-button"
+  );
+
   closeDialog("modal-add", "profile-form");
 }
 
@@ -159,6 +167,45 @@ function deleteCard(event) {
 }
 
 /*Funcion para abrir imagenes*/
+
+function setupImageModal(
+  buttonSelector,
+  dialogSelector,
+  imageSelector,
+  titleSelector,
+  closeButtonSelector
+) {
+  const imageButtons = document.querySelectorAll(buttonSelector);
+  const imageModal = document.querySelector(dialogSelector);
+  const modalImage = document.querySelector(imageSelector);
+  const modalTitle = document.querySelector(titleSelector);
+  const closeModalButton = document.querySelector(closeButtonSelector);
+
+  imageButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const imageURL = this.querySelector(".element__image").src;
+      const title =
+        this.closest(".element").querySelector("#card-title").textContent;
+
+      modalImage.src = imageURL;
+      modalTitle.textContent = title;
+      imageModal.show();
+      opacityPage(true);
+    });
+  });
+
+  closeModalButton.addEventListener("click", function () {
+    imageModal.close();
+    opacityPage(false);
+  });
+
+  imageModal.addEventListener("click", function (event) {
+    if (event.target === imageModal) {
+      imageModal.close();
+      opacityPage(false);
+    }
+  });
+}
 
 /*       <-------------------Codigo--------------------->        */
 
@@ -239,13 +286,36 @@ document.addEventListener("click", function (event) {
   }
 });
 
-/*Profile show*/
-const profileShow = {
-  open: openDialog,
-};
+/*Image show*/
+document.addEventListener("DOMContentLoaded", function () {
+  setupImageModal(
+    ".element__button-image",
+    "#modal-image",
+    "#dialog-image",
+    "#dialog-title",
+    "#dialog-close-button"
+  );
+});
 
-document.getElementById("open-image").addEventListener("click", () => {
-  profileShow.open("image-dialog");
+/*Script para ancho de imagen*/
+document.addEventListener("DOMContentLoaded", () => {
+  const popImage = document.getElementById("dialog-image");
+
+  popImage.onload = () => {
+    if (popImage.naturalWidth > popImage.naturalHeight) {
+      // Imagen horizontal
+      popImage.classList.add("element__modal_horizontal-image");
+      popImage.classList.add("element__modal_horizontal-content");
+      popImage.classList.remove("element__modal_vertical-image");
+      popImage.classList.remove("element__modal_vertical-content");
+    } else if (popImage.naturalHeight > popImage.naturalWidth) {
+      // Imagen vertical
+      popImage.classList.add("element__modal_vertical-image");
+      popImage.classList.add("element__modal_vertical-content");
+      popImage.classList.remove("element__modal_horizontal-image");
+      popImage.classList.remove("element__modal_horizontal-content");
+    }
+  };
 });
 
 /* Script para likear */
