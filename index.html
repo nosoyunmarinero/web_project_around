@@ -40,11 +40,11 @@
               <img src="./images/edit-button.svg" alt=" Boton editar" />
             </button>
           </div>
-          <button class="profile__add-button">+</button>
+          <button class="profile__add-button" id="add-button-open">+</button>
         </section>
 
-        <!--Profile Edit Form-->
-        <dialog id="modal">
+        <!--Dialog Form-->
+        <dialog id="modal-edit" class="dialog-general">
           <button class="profile__close-button">
             <img
               src="./images/Close-Icon.svg"
@@ -85,13 +85,14 @@
               class="element__image"
             />
             <div class="element__description">
-              <p>Valle de Yosemite</p>
+              <p></p>
               <button class="element__button">
                 <img
                   src="./images/heart.svg"
                   alt="Like button"
                   id="heart-off"
                 />
+                <img src="/images/heart.svg" alt="Like button" />
               </button>
             </div>
           </div>
@@ -109,6 +110,9 @@
                   alt="Like button"
                   id="heart-off-2"
                 />
+              <p></p>
+              <button class="element__button" id="">
+                <img src="/images/heart.svg" alt="Like button" />
               </button>
             </div>
           </div>
@@ -121,11 +125,7 @@
             <div class="element__description">
               <p>Montañas Calvas</p>
               <button class="element__button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Like button"
-                  id="heart-off-3"
-                />
+                <img src="./images/heart.svg" alt="Like button" />
               </button>
             </div>
           </div>
@@ -143,6 +143,7 @@
                   alt="Like button"
                   id="heart-off-4"
                 />
+                <img src="/images/heart.svg" alt="Like button" />
               </button>
             </div>
           </div>
@@ -160,6 +161,7 @@
                   alt="Like button"
                   id="heart-off-5"
                 />
+                <img src="/images/heart.svg" alt="Like button" />
               </button>
             </div>
           </div>
@@ -182,9 +184,55 @@
           </div>
         </section>
 
-        <!--Form para agregar tarjetas-->
-
-        <dialog></dialog>
+        <!--Dialog Place-->
+        <dialog id="modal-add" class="dialog-general">
+          <button class="element__close-button">
+            <img
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              id="add-button-close"
+              class="profile__close-icon"
+            />
+          </button>
+          <form class="profile__edit-form" id="profile-form">
+            <header class="profile__edit-form-header">Nuevo Lugar</header>
+            <input
+              type="text"
+              class="profile__edit-form-input profile__edit-form-input_name"
+              placeholder="Titulo"
+              id="title"
+            />
+            <input
+              type="tex0t"
+              class="profile__edit-form-input profile__edit-form-input_job"
+              placeholder="URL de la imagen"
+              id="imageURL"
+            />
+            <button
+              id="save-button-add"
+              class="profile__edit-form-button profile__edit-form-button_save"
+            >
+              Crear
+            </button>
+          </form>
+        </dialog>
+        <!--Dialog Image-->
+        <dialog id="modal-image" class="element__modal">
+          <button class="element__close-button" id="dialog-close-button">
+            <img
+              src="/images/Close Icon.svg"
+              alt="Cerrar"
+              class="profile__close-icon"
+            />
+          </button>
+          <img
+            id="dialog-image"
+            src=""
+            alt="Imagen bonita"
+            class="element__modal-image"
+          />
+          <p id="dialog-title" class="element__modal-title"></p>
+        </dialog>
         <!--Footer-->
         <footer>
           <p class="footer">© 2021 Around The U.S.</p>

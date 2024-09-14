@@ -1,39 +1,99 @@
-/* Scrip para abir el edit form*/
-const editButtonOpen = document.querySelector("#edit-button-open");
-const editButtonClose = document.querySelector("#edit-button-close");
-const profileEdit = document.querySelector("#modal");
+/* Cards iniciales */
 
-const profileNameElement = document.getElementById("profile-name");
-const profileJobElement = document.getElementById("profile-job");
+const initialCards = [
+  {
+    description: "Chichén Itzá",
+    link: "https://images.unsplash.com/photo-1568402102990-bc541580b59f?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    description: "Monte Fuji",
+    link: "https://images.unsplash.com/photo-1570459027562-4a916cc6113f?q=80&w=988&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    description: "Tromsø",
+    link: "https://images.unsplash.com/photo-1669887961943-54dd571fb287?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    description: "Bali",
+    link: "https://images.unsplash.com/photo-1532186651327-6ac23687d189?q=80&w=1049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    description: "Brujas",
+    link: "https://images.unsplash.com/photo-1554413360-fa283dd6a1ec?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    description: "Cholula",
+    link: "https://images.unsplash.com/photo-1667277310912-585fb643f7c8?q=80&w=1065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
 
-editButtonOpen.addEventListener("click", () => {
-  inputFieldName.value = profileNameElement.textContent;
-  inputFieldJob.value = profileJobElement.textContent;
+/*  <-------------------Funciones--------------------->
 
-  toggleSaveButton();
+/* Función para cargar las tarjetas iniciales */
+function loadInitialCards() {
+  const elementsSection = document.querySelector(".elements");
+  elementsSection.innerHTML = "";
 
-  profileEdit.show();
-  document.querySelector(".header").style.opacity = "0.5";
-  document.querySelector(".profile").style.opacity = "0.5";
-  document.querySelector(".elements").style.opacity = "0.5";
-  document.querySelector(".footer").style.opacity = "0.5";
-});
+  initialCards.forEach((card) => {
+    const cardHTML = `
+      <div class="element">
+      <button class="element__button-image" id="open-image">
+        <img src="${card.link}" alt="${card.description}" class="element__image" />
+        </button>
+          <button class="element__button-delete" id="delete-image">
+            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+          </button>
+        <div class="element__description">
+          <p id="card-title">${card.description}</p>
+            <button class="element__button">
+              <img src="/images/heart.svg" alt="Like button" />
+            </button>
+          </div>
+      </div>
+    `;
+    elementsSection.innerHTML += cardHTML;
+  });
+}
 
-editButtonClose.addEventListener("click", () => {
-  profileEdit.close();
-  document.querySelector(".header").style.opacity = "1";
-  document.querySelector(".profile").style.opacity = "1";
-  document.querySelector(".elements").style.opacity = "1";
-  document.querySelector(".footer").style.opacity = "1";
-});
+document.addEventListener("DOMContentLoaded", loadInitialCards);
 
-/* Scrip color del boton Guardar */
-const inputFieldName = document.querySelector(".profile__edit-form-input_name");
-const inputFieldJob = document.querySelector(".profile__edit-form-input_job");
-const saveButton = document.getElementById("save-button");
+/* Funcion para abrir dialog */
 
-function toggleSaveButton() {
-  if (inputFieldName.value.trim() !== "" && inputFieldJob.value.trim() !== "") {
+function openDialog(dialogID) {
+  const dialog = document.getElementById(dialogID);
+  if (dialog) {
+    dialog.show();
+    opacityPage(true);
+  }
+}
+
+/* Funcion cerrar dialog */
+
+function closeDialog(dialogID, formID) {
+  const dialog = document.getElementById(dialogID);
+  if (dialog) {
+    dialog.close();
+    opacityPage(false);
+  }
+}
+
+/* Funcion oscurecer pagina */
+function opacityPage(dim) {
+  const elements = document.querySelectorAll(
+    ".profile, .header, .elements, .footer"
+  );
+  elements.forEach((element) => {
+    element.style.opacity = dim ? "0.5" : "1";
+  });
+}
+
+/* Funcion color del boton Guardar */
+function toggleSaveButton(input1ID, input2ID, saveButtonID) {
+  const inputField1 = document.getElementById(input1ID);
+  const inputField2 = document.getElementById(input2ID);
+  const saveButton = document.getElementById(saveButtonID);
+
+  if (inputField1.value.trim() !== "" && inputField2.value.trim() !== "") {
     saveButton.style.backgroundColor = "black";
     saveButton.style.color = "white";
   } else {
@@ -42,46 +102,233 @@ function toggleSaveButton() {
   }
 }
 
-inputFieldName.addEventListener("input", toggleSaveButton);
-inputFieldJob.addEventListener("input", toggleSaveButton);
-toggleSaveButton();
-
-/* Scrip para cambiar info del perfil*/
-let formElement = document.querySelector("#profile-form");
-function handleProfileFormSubmit(evt) {
+/* Función para cambiar la información del perfil */
+function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
   evt.preventDefault();
-  let nameInput = document.getElementById("name");
-  let jobInput = document.getElementById("job");
 
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
+  const field1 = document.getElementById(field1ID);
+  const field2 = document.getElementById(field2ID);
 
-  let profileName = document.querySelector("#profile-name");
-  let profileJob = document.querySelector("#profile-job");
+  const field1Value = field1.value;
+  const field2Value = field2.value;
 
-  profileName.textContent = nameValue;
-  profileJob.textContent = jobValue;
+  const displayField1 = document.getElementById(displayField1ID);
+  const displayField2 = document.getElementById(displayField2ID);
 
-  profileEdit.close();
-  document.querySelector(".header").style.opacity = "1";
-  document.querySelector(".profile").style.opacity = "1";
-  document.querySelector(".elements").style.opacity = "1";
-  document.querySelector(".footer").style.opacity = "1";
+  displayField1.textContent = field1Value;
+  displayField2.textContent = field2Value;
 }
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
+/* Función para agregar cards */
+function addCard(evt, titleID, imageURLID) {
+  evt.preventDefault();
 
-/* Scrip para corazon */
-const likeButtons = document.querySelectorAll(".element__button");
+  const title = document.getElementById(titleID).value;
+  const imageURL = document.getElementById(imageURLID).value;
 
-likeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const heartIcon = button.querySelector("img");
+  const newCardHTML = `
+    <div class="element">
+    <button class="element__button-image" id="open-image">
+      <img src="${imageURL}" alt="${title}" class="element__image" />
+      </button>
+      <button class="element__button-delete" id="delete-image">
+            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+          </button>
+      <div class="element__description">
+        <p id="card-title">${title}</p>
+        <button class="element__button">
+          <img src="/images/heart.svg" alt="Like button" />
+        </button>
+      </div>
+    </div>
+  `;
 
-    if (heartIcon.src.includes("heart.svg")) {
-      heartIcon.src = "./images/heart-on.svg";
-    } else {
-      heartIcon.src = "./images/heart.svg";
+  document
+    .querySelector(".elements")
+    .insertAdjacentHTML("afterbegin", newCardHTML);
+
+  setupImageModal(
+    ".element__button-image",
+    "#modal-image",
+    "#dialog-image",
+    "#dialog-title",
+    "#dialog-close-button"
+  );
+
+  closeDialog("modal-add", "profile-form");
+}
+
+/* Funcion para eliminar cards */
+function deleteCard(event) {
+  const cardToDelete = event.target.closest(".element");
+  if (cardToDelete) {
+    cardToDelete.remove();
+  }
+}
+
+/*Funcion para abrir imagenes*/
+
+function setupImageModal(
+  buttonSelector,
+  dialogSelector,
+  imageSelector,
+  titleSelector,
+  closeButtonSelector
+) {
+  const imageButtons = document.querySelectorAll(buttonSelector);
+  const imageModal = document.querySelector(dialogSelector);
+  const modalImage = document.querySelector(imageSelector);
+  const modalTitle = document.querySelector(titleSelector);
+  const closeModalButton = document.querySelector(closeButtonSelector);
+
+  imageButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const imageURL = this.querySelector(".element__image").src;
+      const title =
+        this.closest(".element").querySelector("#card-title").textContent;
+
+      modalImage.src = imageURL;
+      modalTitle.textContent = title;
+      imageModal.show();
+      opacityPage(true);
+    });
+  });
+
+  closeModalButton.addEventListener("click", function () {
+    imageModal.close();
+    opacityPage(false);
+  });
+
+  imageModal.addEventListener("click", function (event) {
+    if (event.target === imageModal) {
+      imageModal.close();
+      opacityPage(false);
+    }
+  });
+}
+
+/*       <-------------------Codigo--------------------->        */
+
+/* Profile edit */
+const profileEdit = {
+  open: openDialog,
+  close: closeDialog,
+  opacity: opacityPage,
+  colorButton: toggleSaveButton,
+  info: saveInfo,
+};
+
+document.getElementById("edit-button-open").addEventListener("click", () => {
+  profileEdit.open("modal-edit");
+});
+
+document.getElementById("edit-button-close").addEventListener("click", () => {
+  profileEdit.close("modal-edit");
+});
+
+document.getElementById("name").addEventListener("input", () => {
+  profileEdit.colorButton("name", "job", "save-button");
+});
+
+document.getElementById("job").addEventListener("input", () => {
+  profileEdit.colorButton("name", "job", "save-button");
+});
+
+document
+  .getElementById("save-button")
+  .addEventListener("click", function (evt) {
+    saveInfo(evt, "name", "job", "profile-name", "profile-job");
+    profileEdit.close("modal-edit");
+  });
+
+/*Profile Add */
+const profileAdd = {
+  open: openDialog,
+  close: closeDialog,
+  opacity: opacityPage,
+  colorButton: toggleSaveButton,
+  add: addCard,
+};
+
+document.getElementById("add-button-open").addEventListener("click", () => {
+  profileAdd.open("modal-add");
+});
+
+document.getElementById("add-button-close").addEventListener("click", () => {
+  profileAdd.close("modal-add");
+});
+
+document.getElementById("title").addEventListener("input", () => {
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+document.getElementById("imageURL").addEventListener("input", () => {
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+document.getElementById("save-button-add").addEventListener("click", (evt) => {
+  profileAdd.add(evt, "title", "imageURL");
+
+  const dialog = document.getElementById("modal-add");
+
+  const form = dialog.querySelector("form");
+  if (form) {
+    form.reset();
+  }
+
+  profileAdd.colorButton("title", "imageURL", "save-button-add");
+});
+
+/* Profile delete*/
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".element__button-delete *")) {
+    deleteCard(event);
+  }
+});
+
+/*Image show*/
+document.addEventListener("DOMContentLoaded", function () {
+  setupImageModal(
+    ".element__button-image",
+    "#modal-image",
+    "#dialog-image",
+    "#dialog-title",
+    "#dialog-close-button"
+  );
+});
+
+/*Script para ancho de imagen*/
+document.addEventListener("DOMContentLoaded", () => {
+  const popImage = document.getElementById("dialog-image");
+
+  popImage.onload = () => {
+    if (popImage.naturalWidth > popImage.naturalHeight) {
+      // Imagen horizontal
+      popImage.classList.add("element__modal_horizontal-image");
+      popImage.classList.add("element__modal_horizontal-content");
+      popImage.classList.remove("element__modal_vertical-image");
+      popImage.classList.remove("element__modal_vertical-content");
+    } else if (popImage.naturalHeight > popImage.naturalWidth) {
+      // Imagen vertical
+      popImage.classList.add("element__modal_vertical-image");
+      popImage.classList.add("element__modal_vertical-content");
+      popImage.classList.remove("element__modal_horizontal-image");
+      popImage.classList.remove("element__modal_horizontal-content");
+    }
+  };
+});
+
+/* Script para likear */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".elements").addEventListener("click", (event) => {
+    const likeButton = event.target.closest(".element__button");
+    if (likeButton) {
+      const heartIcon = likeButton.querySelector("img");
+      if (heartIcon.src.includes("heartOn.svg")) {
+        heartIcon.src = "/images/heart.svg";
+      } else {
+        heartIcon.src = "/images/heartOn.svg";
+      }
     }
   });
 });

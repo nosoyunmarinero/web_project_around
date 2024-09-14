@@ -1,4 +1,4 @@
-dialog {
+.dialog-general {
   max-width: 430px;
   width: 100%;
   position: fixed;
@@ -26,7 +26,7 @@ dialog {
   background: none;
   border: none;
   cursor: pointer;
-  background-color: black;
+  background-color: transparent;
 }
 
 .profile__close-button:hover {
@@ -89,28 +89,23 @@ dialog {
   opacity: 0.8;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 590px) {
   dialog {
     max-width: 282px;
   }
+  .profile__edit-form-input {
+    margin: 0 22px;
+  }
 
-  .profile__edit-form-button {
-    padding: 14px 92px;
+  .profile__edit-form-input_name {
+    margin-bottom: 30px;
+  }
+  .profile__edit-form-input_job {
+    margin-bottom: 46px;
+  }
+  .profile__edit-form-button_save {
     max-width: 238px;
-    align-items: center;
-
-    font-size: 14px;
-  }
-
-  .profile__edit-form-header {
-    font-size: 18px;
-  }
-  .profile__close-button {
-    top: -45px;
-    right: 0;
-  }
-
-  .profile__close-icon {
-    max-width: 24px;
+    display: flex;
+    justify-content: center;
   }
 }
