@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (heartIcon.src.includes("heartOn.svg")) {
         heartIcon.src = "./images/heart.svg";
       } else {
-        heartIcon.src = "./images/heartOn.svg";
+        heartIcon.src = "./images/heart-on.svg";
       }
     }
   });
