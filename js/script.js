@@ -41,12 +41,12 @@ function loadInitialCards() {
         <img src="${card.link}" alt="${card.description}" class="element__image" />
         </button>
           <button class="element__button-delete" id="delete-image">
-            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+            <img src="./images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
           </button>
         <div class="element__description">
           <p id="card-title">${card.description}</p>
             <button class="element__button">
-              <img src="/images/heart.svg" alt="Like button" />
+              <img src="./images/heart.svg" alt="Like button" />
             </button>
           </div>
       </div>
@@ -132,12 +132,12 @@ function addCard(evt, titleID, imageURLID) {
       <img src="${imageURL}" alt="${title}" class="element__image" />
       </button>
       <button class="element__button-delete" id="delete-image">
-            <img src="/images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
+            <img src="./images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
           </button>
       <div class="element__description">
         <p id="card-title">${title}</p>
         <button class="element__button">
-          <img src="/images/heart.svg" alt="Like button" />
+          <img src="./images/heart.svg" alt="Like button" />
         </button>
       </div>
     </div>
@@ -325,9 +325,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (likeButton) {
       const heartIcon = likeButton.querySelector("img");
       if (heartIcon.src.includes("heartOn.svg")) {
-        heartIcon.src = "/images/heart.svg";
+        heartIcon.src = "./images/heart.svg";
       } else {
-        heartIcon.src = "/images/heartOn.svg";
+        heartIcon.src = "./images/heartOn.svg";
       }
     }
   });
