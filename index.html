@@ -43,7 +43,7 @@
           <button class="profile__add-button" id="add-button-open">+</button>
         </section>
 
-        <!--Dialog Form-->
+        <!--Dialog Form EDITAR PERFIL-->
         <dialog id="modal-edit" class="dialog-general">
           <button class="profile__close-button">
             <img
@@ -60,7 +60,8 @@
               class="profile__edit-form-input profile__edit-form-input_name"
               placeholder="Nombre"
               id="name"
-              minlength="3"
+              minlength="2"
+              maxlength="40"
               required
             />
             <input
@@ -68,7 +69,8 @@
               class="profile__edit-form-input profile__edit-form-input_job"
               placeholder="Acerca de mí"
               id="job"
-              minlength="3"
+              minlength="2"
+              maxlength="200"
               required
             />
             <button
@@ -183,7 +185,7 @@
           </div>
         </section>
 
-        <!--Dialog Place-->
+        <!--Dialog Place -->
         <dialog id="modal-add" class="dialog-general">
           <button class="element__close-button">
             <img
@@ -200,6 +202,8 @@
               class="profile__edit-form-input profile__edit-form-input_name"
               placeholder="Titulo"
               id="title"
+              minlength="2"
+              maxlength="30"
               required
             />
             <input
