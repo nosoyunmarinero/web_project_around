@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 });
 
-/* Script para likear */
+/* Script para likear SE DEBE RESCRIBIR*/
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".elements").addEventListener("click", (event) => {
     const likeButton = event.target.closest(".element__button");
@@ -334,3 +334,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Validacion de Formularios */
+
+// Se crean Variables
+const formElement = document.querySelector(".profile__edit-form");
+const formInput = formElement.querySelector(".profile__edit-form-input");
+const formError = formElement.querySelector(`.${formInput.id}-error`);
+
+formElement.addEventListener("submit", function (evt) {
+  evt.preventDefault(); //Evita comportamientos default
+});
+
+formElement.addEventListener("input", function () {
+  checkInputValidity();
+});
+
+const showError = (input, errorMessage) => {
+  input.classList.add("form__input_type_error");
+  formError.textContent = errorMessage;
+  formError.classList.add("form__input-error_active");
+};
+
+const hideError = (input) => {
+  input.classList.remove(".form__input_type_error");
+};
+
+const checkInputValidity = () => {
+  if (!formInput.validity.valid) {
+    showError(formInput, formInput.validationMessage);
+  } else {
+    hideError(formInput);
+  }
+};

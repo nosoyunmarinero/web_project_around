@@ -89,6 +89,10 @@
   opacity: 0.8;
 }
 
+.form__input_type_error {
+  border-bottom-color: red;
+}
+
 @media screen and (max-width: 590px) {
   dialog {
     max-width: 282px;
