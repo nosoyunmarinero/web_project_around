@@ -345,17 +345,20 @@ formElement.addEventListener("submit", function (evt) {
 });
 
 formElement.addEventListener("input", function () {
+  console.log("Se registra correctamente los inputs");
   checkInputValidity();
 });
 
 const showError = (input, errorMessage) => {
   input.classList.add("form__input_type_error");
-  formError.textContent = errorMessage;
+  formError.textContent = errorMessage; // Null por que aun no la hemos llamado
   formError.classList.add("form__input-error_active");
 };
 
 const hideError = (input) => {
   input.classList.remove(".form__input_type_error");
+  formError.classList.remove("form__input-error_active");
+  formError.textContent = "";
 };
 
 const checkInputValidity = () => {
