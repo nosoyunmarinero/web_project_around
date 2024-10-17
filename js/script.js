@@ -103,7 +103,13 @@ function toggleSaveButton(input1ID, input2ID, saveButtonID) {
 }
 
 /* Función para cambiar la información del perfil */
-function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
+const saveInfo = (
+  evt,
+  field1ID,
+  field2ID,
+  displayField1ID,
+  displayField2ID
+) => {
   evt.preventDefault();
 
   const field1 = document.getElementById(field1ID);
@@ -117,7 +123,7 @@ function saveInfo(evt, field1ID, field2ID, displayField1ID, displayField2ID) {
 
   displayField1.textContent = field1Value;
   displayField2.textContent = field2Value;
-}
+};
 
 /* Función para agregar cards */
 function addCard(evt, titleID, imageURLID) {
