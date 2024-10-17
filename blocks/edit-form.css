@@ -62,11 +62,9 @@
 }
 
 .profile__edit-form-input_name {
-  margin-bottom: 29px;
 }
 
 .profile__edit-form-input_job {
-  margin-bottom: 48px;
 }
 
 .profile__edit-form-button {
@@ -83,14 +81,27 @@
   color: #c4c4c4;
   border: 1px solid #c4c4c4;
   align-self: center;
+  margin-top: 48px;
 }
 
 .profile__edit-form-button_save:hover {
   opacity: 0.8;
 }
 
+/*Formatos para validacion*/
 .form__input_type_error {
   border-bottom-color: red;
+}
+
+.form__input-error_active {
+  color: red;
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin: 0px 35px;
+  padding-left: 13px;
+  padding-top: 5px;
 }
 
 @media screen and (max-width: 590px) {

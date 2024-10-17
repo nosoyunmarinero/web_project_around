@@ -64,6 +64,7 @@
               maxlength="40"
               required
             />
+            <span class="form__input-error" id="name-error"></span>
             <input
               type="text"
               class="profile__edit-form-input profile__edit-form-input_job"
@@ -73,6 +74,7 @@
               maxlength="200"
               required
             />
+            <span class="form__input-error" id="job-error"></span>
             <button
               id="save-button"
               class="profile__edit-form-button profile__edit-form-button_save"
@@ -185,7 +187,7 @@
           </div>
         </section>
 
-        <!--Dialog Place -->
+        <!--Dialog Place AGREGAR FOTOS-->
         <dialog id="modal-add" class="dialog-general">
           <button class="element__close-button">
             <img
@@ -206,6 +208,7 @@
               maxlength="30"
               required
             />
+            <span class="form__input-error" id="title-error"></span>
             <input
               type="url"
               class="profile__edit-form-input profile__edit-form-input_job"
@@ -213,6 +216,7 @@
               id="imageURL"
               required
             />
+            <span class="form__input-error" id="imageURL-error"></span>
             <button
               id="save-button-add"
               class="profile__edit-form-button profile__edit-form-button_save"

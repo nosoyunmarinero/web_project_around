@@ -335,36 +335,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* Validacion de Formularios */
 
-// Se crean Variables
-const formElement = document.querySelector(".profile__edit-form");
-const formInput = formElement.querySelector(".profile__edit-form-input");
-const formError = formElement.querySelector(`.${formInput.id}-error`);
-
-formElement.addEventListener("submit", function (evt) {
-  evt.preventDefault(); //Evita comportamientos default
-});
-
-formElement.addEventListener("input", function () {
-  console.log("Se registra correctamente los inputs");
-  checkInputValidity();
-});
-
-const showError = (input, errorMessage) => {
-  input.classList.add("form__input_type_error");
-  formError.textContent = errorMessage; // Null por que aun no la hemos llamado
-  formError.classList.add("form__input-error_active");
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add("form__input_type_error");
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
 };
 
-const hideError = (input) => {
-  input.classList.remove(".form__input_type_error");
-  formError.classList.remove("form__input-error_active");
-  formError.textContent = "";
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
 };
 
-const checkInputValidity = () => {
-  if (!formInput.validity.valid) {
-    showError(formInput, formInput.validationMessage);
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
-    hideError(formInput);
+    hideInputError(formElement, inputElement);
   }
 };
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(
+    formElement.querySelectorAll(".profile__edit-form-input")
+  );
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement);
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll(".profile__edit-form"));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+};
+
+enableValidation();
