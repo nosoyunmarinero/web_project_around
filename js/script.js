@@ -87,7 +87,7 @@ function opacityPage(dim) {
   });
 }
 
-/* Funcion color del boton Guardar */
+/* Funcion color del boton Guardar *
 function toggleSaveButton(input1ID, input2ID, saveButtonID) {
   const inputField1 = document.getElementById(input1ID);
   const inputField2 = document.getElementById(input2ID);
@@ -213,6 +213,39 @@ function setupImageModal(
   });
 }
 
+/* Funcion para desactivar boton */
+
+const btnControl = (input1ID, input2ID, buttonID) => {
+  const inp1 = document.getElementById(input1ID);
+  const inp2 = document.getElementById(input2ID);
+  const btn = document.getElementById(buttonID);
+
+  const validarInputs = () => {
+    if (inp1.value === "" || inp2.value === "") {
+      btn.disabled = true;
+      btn.style.backgroundColor = "transparent";
+      btn.style.color = "#c4c4c4";
+    } else {
+      btn.disabled = false;
+      btn.style.backgroundColor = "black";
+      btn.style.color = "white";
+    }
+  };
+
+  if (inp1 && inp2 && btn) {
+    inp1.addEventListener("input", validarInputs);
+    inp2.addEventListener("input", validarInputs);
+
+    // Validar inicialmente al cargar la página
+    validarInputs();
+  } else {
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  btnControl("name", "job", "save-button");
+});
+
 /*       <-------------------Codigo--------------------->        */
 
 /* Profile edit */
@@ -220,8 +253,8 @@ const profileEdit = {
   open: openDialog,
   close: closeDialog,
   opacity: opacityPage,
-  colorButton: toggleSaveButton,
   info: saveInfo,
+  btn: btnControl,
 };
 
 document.getElementById("edit-button-open").addEventListener("click", () => {
@@ -233,11 +266,11 @@ document.getElementById("edit-button-close").addEventListener("click", () => {
 });
 
 document.getElementById("name").addEventListener("input", () => {
-  profileEdit.colorButton("name", "job", "save-button");
+  profileEdit.btn("name", "job", "save-button");
 });
 
 document.getElementById("job").addEventListener("input", () => {
-  profileEdit.colorButton("name", "job", "save-button");
+  profileEdit.btn("name", "job", "save-button");
 });
 
 document
@@ -252,7 +285,6 @@ const profileAdd = {
   open: openDialog,
   close: closeDialog,
   opacity: opacityPage,
-  colorButton: toggleSaveButton,
   add: addCard,
 };
 
