@@ -221,7 +221,7 @@ const btnControl = (input1ID, input2ID, buttonID) => {
   const btn = document.getElementById(buttonID);
 
   const validarInputs = () => {
-    if (inp1.value === "" || inp2.value === "") {
+    if (!inp1.validity.valid || !inp2.validity.valid) {
       btn.disabled = true;
       btn.style.backgroundColor = "transparent";
       btn.style.color = "#c4c4c4";
@@ -232,14 +232,10 @@ const btnControl = (input1ID, input2ID, buttonID) => {
     }
   };
 
-  if (inp1 && inp2 && btn) {
-    inp1.addEventListener("input", validarInputs);
-    inp2.addEventListener("input", validarInputs);
+  inp1.addEventListener("input", validarInputs);
+  inp2.addEventListener("input", validarInputs);
 
-    // Validar inicialmente al cargar la página
-    validarInputs();
-  } else {
-  }
+  validarInputs();
 };
 
 document.addEventListener("DOMContentLoaded", () => {
