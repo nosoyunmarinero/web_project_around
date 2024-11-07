@@ -38,7 +38,7 @@ function loadInitialCards() {
     const cardHTML = `
       <div class="element">
       <button class="element__button-image" id="open-image">
-        <img src="${card.link}" alt="${card.description}" class="element__image" />
+        <img src="${card.link}" alt="${card.description}" class="element__image"/>
         </button>
           <button class="element__button-delete" id="delete-image">
             <img src="./images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
