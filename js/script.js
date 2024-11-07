@@ -87,21 +87,6 @@ function opacityPage(dim) {
   });
 }
 
-/* Funcion color del boton Guardar *
-function toggleSaveButton(input1ID, input2ID, saveButtonID) {
-  const inputField1 = document.getElementById(input1ID);
-  const inputField2 = document.getElementById(input2ID);
-  const saveButton = document.getElementById(saveButtonID);
-
-  if (inputField1.value.trim() !== "" && inputField2.value.trim() !== "") {
-    saveButton.style.backgroundColor = "black";
-    saveButton.style.color = "white";
-  } else {
-    saveButton.style.backgroundColor = "transparent";
-    saveButton.style.color = "#c4c4c4";
-  }
-}
-
 /* Función para cambiar la información del perfil */
 const saveInfo = (
   evt,
@@ -215,7 +200,7 @@ function setupImageModal(
 
 /* Funcion para desactivar boton */
 
-const btnControl = (input1ID, input2ID, buttonID) => {
+const toggleSaveButton = (input1ID, input2ID, buttonID) => {
   const inp1 = document.getElementById(input1ID);
   const inp2 = document.getElementById(input2ID);
   const btn = document.getElementById(buttonID);
@@ -239,7 +224,7 @@ const btnControl = (input1ID, input2ID, buttonID) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  btnControl("name", "job", "save-button");
+  toggleSaveButton("name", "job", "save-button");
 });
 
 /*       <-------------------Codigo--------------------->        */
@@ -250,7 +235,7 @@ const profileEdit = {
   close: closeDialog,
   opacity: opacityPage,
   info: saveInfo,
-  btn: btnControl,
+  btn: toggleSaveButton,
 };
 
 document.getElementById("edit-button-open").addEventListener("click", () => {
@@ -282,6 +267,7 @@ const profileAdd = {
   close: closeDialog,
   opacity: opacityPage,
   add: addCard,
+  btn: toggleSaveButton,
 };
 
 document.getElementById("add-button-open").addEventListener("click", () => {
@@ -293,11 +279,11 @@ document.getElementById("add-button-close").addEventListener("click", () => {
 });
 
 document.getElementById("title").addEventListener("input", () => {
-  profileAdd.colorButton("title", "imageURL", "save-button-add");
+  profileAdd.btn("title", "imageURL", "save-button-add");
 });
 
 document.getElementById("imageURL").addEventListener("input", () => {
-  profileAdd.colorButton("title", "imageURL", "save-button-add");
+  profileAdd.btn("title", "imageURL", "save-button-add");
 });
 
 document.getElementById("save-button-add").addEventListener("click", (evt) => {
@@ -366,50 +352,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-/* Validacion de Formularios */
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add("form__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove("form__input_type_error");
-  errorElement.classList.remove("form__input-error_active");
-  errorElement.textContent = "";
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(
-    formElement.querySelectorAll(".profile__edit-form-input")
-  );
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".profile__edit-form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-enableValidation();
