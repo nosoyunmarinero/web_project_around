@@ -69,7 +69,7 @@ function openDialog(dialogID) {
 
 /* Funcion cerrar dialog */
 
-function closeDialog(dialogID, formID) {
+function closeDialog(dialogID) {
   const dialog = document.getElementById(dialogID);
   if (dialog) {
     dialog.close();
@@ -246,6 +246,10 @@ document.getElementById("edit-button-close").addEventListener("click", () => {
   profileEdit.close("modal-edit");
 });
 
+document.getElementById("modal-edit").addEventListener("keydown", (e) => {
+  if (e.key === "Escape") profileEdit.close("modal-edit");
+});
+
 document.getElementById("name").addEventListener("input", () => {
   profileEdit.btn("name", "job", "save-button");
 });
@@ -276,6 +280,10 @@ document.getElementById("add-button-open").addEventListener("click", () => {
 
 document.getElementById("add-button-close").addEventListener("click", () => {
   profileAdd.close("modal-add");
+});
+
+document.getElementById("modal-add").addEventListener("keydown", (e) => {
+  if (e.key === "Escape") profileAdd.close("modal-add");
 });
 
 document.getElementById("title").addEventListener("input", () => {
