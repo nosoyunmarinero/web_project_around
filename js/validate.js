@@ -1,8 +1,8 @@
 /* Validacion de Formularios */
 
 const configValidation = {
-  formSelector: "profile__edit-form",
-  inputSelector: "profile__edit-form-input",
+  formSelector: ".profile__edit-form",
+  inputSelector: ".profile__edit-form-input",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
 };
