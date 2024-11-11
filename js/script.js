@@ -127,8 +127,8 @@ function addCard(evt, titleID, imageURLID) {
           </button>
       <div class="element__description">
         <p id="card-title">${title}</p>
-        <button class="element__button" onclick=toggleLike()>
-          <img src="./images/heart.svg" alt="Like button" />
+        <button class="element__button" onclick=toggleLike(this)>
+          <img src="./images/heart.svg" class="element__like-button "alt="Like button"/>
         </button>
       </div>
     </div>
