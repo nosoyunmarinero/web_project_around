@@ -45,8 +45,8 @@ function loadInitialCards() {
           </button>
         <div class="element__description">
           <p id="card-title">${card.description}</p>
-            <button class="element__button" onclick="toggleLike()">
-              <img src="./images/heart.svg" class="element__like-button "alt="Like button" id="like-button"/>
+            <button class="element__button" onclick="toggleLike(this)">
+              <img src="./images/heart.svg" class="element__like-button "alt="Like button"/>
             </button>
           </div>
       </div>
@@ -127,7 +127,7 @@ function addCard(evt, titleID, imageURLID) {
           </button>
       <div class="element__description">
         <p id="card-title">${title}</p>
-        <button class="element__button">
+        <button class="element__button" onclick=toggleLike()>
           <img src="./images/heart.svg" alt="Like button" />
         </button>
       </div>
@@ -347,12 +347,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Script para likear SE DEBE RESCRIBIR*/
-function toggleLike() {
-  const img = document.getElementById("like-button");
+function toggleLike(button) {
+  const img = button.querySelector("img"); // Selecciona la imagen dentro del botón
 
   if (img.src.includes("heart.svg")) {
-    img.src = "./images/heart-on.svg";
+    img.src = "./images/heart-on.svg"; // Cambia la imagen si es el corazón vacío
   } else {
-    img.src = "./images/heart.svg";
+    img.src = "./images/heart.svg"; // Cambia la imagen si es el corazón lleno
   }
 }
