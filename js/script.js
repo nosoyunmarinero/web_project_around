@@ -45,8 +45,8 @@ function loadInitialCards() {
           </button>
         <div class="element__description">
           <p id="card-title">${card.description}</p>
-            <button class="element__button">
-              <img src="./images/heart.svg" alt="Like button" />
+            <button class="element__button" onclick="toggleLike()">
+              <img src="./images/heart.svg" class="element__like-button "alt="Like button" id="like-button"/>
             </button>
           </div>
       </div>
@@ -347,16 +347,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Script para likear SE DEBE RESCRIBIR*/
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector(".elements").addEventListener("click", (event) => {
-    const likeButton = event.target.closest(".element__button");
-    if (likeButton) {
-      const heartIcon = likeButton.querySelector("img");
-      if (heartIcon.src.includes("heartOn.svg")) {
-        heartIcon.src = "./images/heart.svg";
-      } else {
-        heartIcon.src = "./images/heart-on.svg";
-      }
-    }
-  });
-});
+function toggleLike() {
+  const img = document.getElementById("like-button");
+
+  if (img.src.includes("heart.svg")) {
+    img.src = "./images/heart-on.svg";
+  } else {
+    img.src = "./images/heart.svg";
+  }
+}
