@@ -190,8 +190,12 @@ function setupImageModal(
     opacityPage(false);
   });
 
-  imageModal.addEventListener("click", function (event) {
-    if (event.target === imageModal) {
+  document.addEventListener("click", function (e) {
+    if (
+      imageModal.open &&
+      !imageModal.contains(e.target) &&
+      !e.target.closest(buttonSelector)
+    ) {
       imageModal.close();
       opacityPage(false);
     }
@@ -346,13 +350,38 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 });
 
-/* Script para likear SE DEBE RESCRIBIR*/
+/* Script para cerrar dialogs clickeando afuera */
+
+document.addEventListener("click", (e) => {
+  const modalEdit = document.getElementById("modal-edit");
+  const modalAdd = document.getElementById("modal-add");
+  const isEditOpen = modalEdit.open;
+  const isAddOpen = modalAdd.open;
+
+  if (
+    isEditOpen &&
+    !modalEdit.contains(e.target) &&
+    e.target.id !== "edit-button-open"
+  ) {
+    profileEdit.close("modal-edit");
+  }
+
+  if (
+    isAddOpen &&
+    !modalAdd.contains(e.target) &&
+    e.target.id !== "add-button-open"
+  ) {
+    profileAdd.close("modal-add");
+  }
+});
+
+/* Script para likear*/
 function toggleLike(button) {
-  const img = button.querySelector("img"); // Selecciona la imagen dentro del botón
+  const img = button.querySelector("img");
 
   if (img.src.includes("heart.svg")) {
-    img.src = "./images/heart-on.svg"; // Cambia la imagen si es el corazón vacío
+    img.src = "./images/heart-on.svg";
   } else {
-    img.src = "./images/heart.svg"; // Cambia la imagen si es el corazón lleno
+    img.src = "./images/heart.svg";
   }
 }
