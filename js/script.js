@@ -190,6 +190,13 @@ function setupImageModal(
     opacityPage(false);
   });
 
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      imageModal.close();
+      opacityPage(false);
+    }
+  });
+
   document.addEventListener("click", function (e) {
     if (
       imageModal.open &&
