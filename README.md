@@ -7,7 +7,15 @@ Este proyecto consiste en la creación de una red social para fotógrafos. El ob
 
 ## Funcionalidad
 
-El sitio web permite a los usuarios editar su perfil con un nombre y una descripción, cambiar el estado del botón de "me gusta" en las fotos y actualizar la información del perfil en tiempo real utilizando un modal para la edición.
+El sitio web permite a los usuarios editar su perfil con un nombre y una descripción, cambiar el estado del botón de "me gusta" en las fotos y actualizar la información del perfil en tiempo real utilizando un modal para la edición. Además, se implementó una funcionalidad de validación de formularios para garantizar que los datos ingresados sean correctos antes de ser enviados.
+
+## Validación de Formularios
+
+En este proyecto, se implementó una validación de formularios utilizando JavaScript. El objetivo de esta funcionalidad es asegurar que los datos ingresados en los formularios sean válidos antes de que los usuarios puedan enviar sus datos. Se verifican los campos de texto de los formularios y se muestra un mensaje de error si alguno de los campos no cumple con los requisitos establecidos (como longitud mínima o formato válido). 
+
+La validación se realiza en tiempo real mientras el usuario interactúa con los campos del formulario, proporcionando una retroalimentación instantánea. Si un campo es válido, el error se oculta; si es inválido, se muestra el mensaje de error correspondiente. 
+
+Los formularios son manejados de manera flexible, lo que permite adaptar fácilmente la validación a diferentes formularios dentro del sitio web. Este enfoque mejora la experiencia del usuario al garantizar que los datos enviados sean correctos y completos.
 
 ## Tecnologías y Técnicas Utilizadas
 
