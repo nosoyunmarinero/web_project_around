@@ -30,32 +30,7 @@ const initialCards = [
 /*  <-------------------Funciones--------------------->
 
 /* Función para cargar las tarjetas iniciales */
-function loadInitialCards() {
-  const elementsSection = document.querySelector(".elements");
-  elementsSection.innerHTML = "";
-
-  initialCards.forEach((card) => {
-    const cardHTML = `
-      <div class="element">
-      <button class="element__button-image" id="open-image">
-        <img src="${card.link}" alt="${card.description}" class="element__image"/>
-        </button>
-          <button class="element__button-delete" id="delete-image">
-            <img src="./images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
-          </button>
-        <div class="element__description">
-          <p id="card-title">${card.description}</p>
-            <button class="element__button" onclick="toggleLike(this)">
-              <img src="./images/heart.svg" class="element__like-button "alt="Like button"/>
-            </button>
-          </div>
-      </div>
-    `;
-    elementsSection.innerHTML += cardHTML;
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadInitialCards);
+import { Card } from "./Card";
 
 /* Funcion para abrir dialog */
 
