@@ -71,6 +71,14 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("title").value = "";
       document.getElementById("imageURL").value = "";
 
+      setupImageModal(
+        ".element__button-image",
+        "#modal-image",
+        "#dialog-image",
+        "#dialog-title",
+        "#dialog-close-button"
+      );
+
       closeDialog("modal-add", "profile-form");
     });
 });
