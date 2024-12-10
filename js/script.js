@@ -44,6 +44,37 @@ initialCards.forEach((item) => {
 
   document.querySelector(".element-list__item").append(cardElement);
 });
+
+/* Funcion para agregar cards */
+
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("save-button-add")
+    .addEventListener("click", function (evt) {
+      evt.preventDefault();
+
+      const title = document.querySelector("#title").value;
+      const imageURL = document.querySelector("#imageURL").value;
+
+      const newCardData = {
+        title: title,
+        image: imageURL,
+      };
+
+      initialCards.push(newCardData);
+
+      const card = new Card(newCardData, "#template-selector");
+
+      const cardElement = card.generateCard();
+      document.querySelector(".element-list__item").prepend(cardElement);
+
+      document.getElementById("title").value = "";
+      document.getElementById("imageURL").value = "";
+
+      closeDialog("modal-add", "profile-form");
+    });
+});
+
 /* Funcion para abrir dialog */
 
 function openDialog(dialogID) {
@@ -97,7 +128,7 @@ const saveInfo = (
   displayField2.textContent = field2Value;
 };
 
-/* Función para agregar cards */
+/* Función para agregar cards *
 function addCard(evt, titleID, imageURLID) {
   evt.preventDefault();
 
@@ -268,7 +299,6 @@ const profileAdd = {
   open: openDialog,
   close: closeDialog,
   opacity: opacityPage,
-  add: addCard,
   btn: toggleSaveButton,
 };
 
@@ -290,19 +320,6 @@ document.getElementById("title").addEventListener("input", () => {
 
 document.getElementById("imageURL").addEventListener("input", () => {
   profileAdd.btn("title", "imageURL", "save-button-add");
-});
-
-document.getElementById("save-button-add").addEventListener("click", (evt) => {
-  profileAdd.add(evt, "title", "imageURL");
-
-  const dialog = document.getElementById("modal-add");
-
-  const form = dialog.querySelector("form");
-  if (form) {
-    form.reset();
-  }
-
-  profileAdd.colorButton("title", "imageURL", "save-button-add");
 });
 
 /* Profile delete*/
