@@ -1,4 +1,4 @@
-.elements {
+.element-list__item {
   display: grid;
   background-color: #000000;
   grid-template-columns: repeat(3, 1fr);
