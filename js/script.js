@@ -136,45 +136,6 @@ const saveInfo = (
   displayField2.textContent = field2Value;
 };
 
-/* Función para agregar cards *
-function addCard(evt, titleID, imageURLID) {
-  evt.preventDefault();
-
-  const title = document.getElementById(titleID).value;
-  const imageURL = document.getElementById(imageURLID).value;
-
-  const newCardHTML = `
-    <div class="element">
-    <button class="element__button-image" id="open-image">
-      <img src="${imageURL}" alt="${title}" class="element__image" />
-      </button>
-      <button class="element__button-delete" id="delete-image">
-            <img src="./images/thrashcan.svg" alt= "Delete button" class="element__image-delete" />
-          </button>
-      <div class="element__description">
-        <p id="card-title">${title}</p>
-        <button class="element__button" onclick=toggleLike(this)>
-          <img src="./images/heart.svg" class="element__like-button "alt="Like button"/>
-        </button>
-      </div>
-    </div>
-  `;
-
-  document
-    .querySelector(".elements")
-    .insertAdjacentHTML("afterbegin", newCardHTML);
-
-  setupImageModal(
-    ".element__button-image",
-    "#modal-image",
-    "#dialog-image",
-    "#dialog-title",
-    "#dialog-close-button"
-  );
-
-  closeDialog("modal-add", "profile-form");
-}
-
 /* Funcion para eliminar cards */
 function deleteCard(event) {
   const cardToDelete = event.target.closest(".element");
@@ -396,7 +357,7 @@ document.addEventListener("click", (e) => {
 
 /* Script para likear*/
 function toggleLike(button) {
-  const img = button.querySelector("img");
+  const img = button.querySelector(".element__like-button");
 
   if (img.src.includes("heart.svg")) {
     img.src = "./images/heart-on.svg";
@@ -404,3 +365,9 @@ function toggleLike(button) {
     img.src = "./images/heart.svg";
   }
 }
+
+document
+  .querySelector(".element__button-like")
+  .addEventListener("click", function () {
+    toggleLike(this);
+  });
