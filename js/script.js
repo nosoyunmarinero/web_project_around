@@ -1,3 +1,7 @@
+//Imports
+import { Card } from "./Card.js";
+import { toggleLikeButton } from "./utils.js";
+
 /* Cards iniciales */
 
 const initialCards = [
@@ -36,11 +40,11 @@ const initialCards = [
 /*  <-------------------Funciones--------------------->
 
 /* Función para cargar las tarjetas iniciales */
-import { Card } from "./Card.js";
 
 initialCards.forEach((item) => {
   const card = new Card(item, "#template-selector");
   const cardElement = card.generateCard();
+  toggleLikeButton(cardElement, card);
 
   document.querySelector(".element-list__item").append(cardElement);
 });
@@ -356,18 +360,3 @@ document.addEventListener("click", (e) => {
 });
 
 /* Script para likear*/
-function toggleLike(button) {
-  const img = button.querySelector(".element__like-button");
-
-  if (img.src.includes("heart.svg")) {
-    img.src = "./images/heart-on.svg";
-  } else {
-    img.src = "./images/heart.svg";
-  }
-}
-
-document
-  .querySelector(".element__button-like")
-  .addEventListener("click", function () {
-    toggleLike(this);
-  });

@@ -3,7 +3,12 @@ export class Card {
   constructor(data, templateSelector) {
     this._image = data.image;
     this._title = data.title;
+    this.isLiked = false;
     this._templateSelector = templateSelector;
+  }
+
+  toggleLike() {
+    this.isLiked = !this.isLiked;
   }
 
   _getTemplate() {
