@@ -27,6 +27,18 @@ export class Card {
     this._element.querySelector(".element__title").textContent = this._title;
     this._element.querySelector(".element__image").src = `${this._image}`;
 
+    const likeButton = this._element.querySelector(".element__button-like");
+    const likeIcon = this._element.querySelector(".element__like-button");
+
+    likeButton.addEventListener("click", () => {
+      this.toggleLike();
+      if (this.isLiked) {
+        likeIcon.src = "./images/heart-on.svg";
+      } else {
+        likeIcon.src = "./images/heart.svg";
+      }
+    });
+
     return this._element;
   }
 }
