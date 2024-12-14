@@ -1,4 +1,5 @@
 //Imports
+import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
 
 /* Cards iniciales */
@@ -357,4 +358,16 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* Script para likear*/
+/* Form Validator */
+
+const formElement = document.querySelector(".profile__edit-form");
+
+const validation = new FormValidator(formElement, {
+  formSelector: ".profile__edit-form",
+  inputSelector: ".profile__edit-form-input",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+  buttonSelector: "profile__edit-form-button",
+});
+
+validation.enableValidation();

@@ -6,24 +6,55 @@ export default class FormValidator {
 
   showInputError(inputElement) {
     const errorElement = this.form.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add(settings.inputErrorClass);
+    inputElement.classList.add(this.settings.inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add("form__input-error_active");
   }
   hideInputError(inputElement) {
     const errorElement = this.form.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove(settings.inputErrorClass);
+    inputElement.classList.remove(this.settings.inputErrorClass);
     errorElement.textContent = "";
   }
 
-  checkInputValidity(inputList, buttonElement) {
+  checkInputValidity(inputElement) {
     !inputElement.validity.valid
       ? this.showInputError(inputElement)
       : this.hideInputError(inputElement);
   }
   hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
-      return !inputList.validity.valid;
+      return !inputElement.validity.valid;
     });
+  }
+  toggleSaveButton(inputList, buttonElement) {
+    if (this.hasInvalidInput(inputList)) {
+      buttonElement.disabled = true;
+      buttonElement.style.backgroundColor = "transparent";
+      buttonElement.style.color = "#c4c4c4";
+    } else {
+      buttonElement.disabled = false;
+      buttonElement.style.backgroundColor = "black";
+      buttonElement.style.color = "white";
+    }
+  }
+
+  setEventListener() {
+    this.inputList = Array.from(
+      this.form.querySelectorAll(this.settings.inputSelector)
+    );
+    this.buttonElement = this.form.querySelector(this.settings.buttonSelector);
+    this.inputList.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this.checkInputValidity(inputElement);
+        this.toggleSaveButton(this.inputList, this.buttonElement);
+      });
+    });
+  }
+
+  enableValidation() {
+    this.form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+    this.setEventListener();
   }
 }
