@@ -360,14 +360,23 @@ document.addEventListener("click", (e) => {
 
 /* Form Validator */
 
-const formElement = document.querySelector(".profile__edit-form");
+const form1 = document.getElementById("profile-form");
+const form2 = document.getElementById("add-card-form");
 
-const validation = new FormValidator(formElement, {
-  formSelector: ".profile__edit-form",
+const infoValidation = new FormValidator(form1, {
   inputSelector: ".profile__edit-form-input",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
   buttonSelector: "profile__edit-form-button",
 });
 
-validation.enableValidation();
+infoValidation.enableValidation();
+
+const imageValidation = new FormValidator(form2, {
+  inputSelector: ".profile__edit-form-input",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+  buttonSelector: "profile__edit-form-button",
+});
+
+imageValidation.enableValidation();
