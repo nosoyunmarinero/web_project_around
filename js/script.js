@@ -1,6 +1,7 @@
 //Imports
 import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
+import { closeDialog } from "./utils.js";
 
 /* Cards iniciales */
 

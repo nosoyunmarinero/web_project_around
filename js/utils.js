@@ -12,7 +12,7 @@ function openDialog(dialogID) {
 
 /* Funcion para cerrar Dialogs*/
 
-function closeDialog(dialogID) {
+export function closeDialog(dialogID) {
   const dialog = document.getElementById(dialogID);
   if (dialog) {
     dialog.close();
@@ -93,6 +93,7 @@ const profileAdd = {
 
 document.getElementById("add-button-open").addEventListener("click", () => {
   profileAdd.open("modal-add");
+  profileAdd.btn("title", "imageURL", "save-button-add");
 });
 
 document.getElementById("add-button-close").addEventListener("click", () => {
