@@ -86,38 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-/* Funcion para abrir dialog */
-
-function openDialog(dialogID) {
-  const dialog = document.getElementById(dialogID);
-  if (dialog) {
-    dialog.show();
-    opacityPage(true);
-  }
-}
-
-/* Funcion cerrar dialog */
-
-function closeDialog(dialogID) {
-  const dialog = document.getElementById(dialogID);
-  if (dialog) {
-    dialog.close();
-    opacityPage(false);
-  }
-}
-
-/* Funcion oscurecer pagina */
-function opacityPage(dim) {
-  const elements = document.querySelectorAll(
-    ".profile, .header, .elements, .footer"
-  );
-  elements.forEach((element) => {
-    element.style.opacity = dim ? "0.5" : "1";
-  });
-}
-
 /* Función para cambiar la información del perfil */
-const saveInfo = (
+export const saveInfo = (
   evt,
   field1ID,
   field2ID,
@@ -147,6 +117,15 @@ function deleteCard(event) {
   }
 }
 
+/* Funcion oscurecer pagina */
+export function opacityPage(dim) {
+  const elements = document.querySelectorAll(
+    ".profile, .header, .elements, .footer, .element-list__item"
+  );
+  elements.forEach((element) => {
+    element.style.opacity = dim ? "0.5" : "1";
+  });
+}
 /*Funcion para abrir imagenes*/
 
 function setupImageModal(
@@ -201,7 +180,7 @@ function setupImageModal(
 
 /* Funcion para desactivar boton */
 
-const toggleSaveButton = (input1ID, input2ID, buttonID) => {
+export const toggleSaveButton = (input1ID, input2ID, buttonID) => {
   const inp1 = document.getElementById(input1ID);
   const inp2 = document.getElementById(input2ID);
   const btn = document.getElementById(buttonID);
@@ -211,10 +190,12 @@ const toggleSaveButton = (input1ID, input2ID, buttonID) => {
       btn.disabled = true;
       btn.style.backgroundColor = "transparent";
       btn.style.color = "#c4c4c4";
+      btn.style.cursor = "not-allowed";
     } else {
       btn.disabled = false;
       btn.style.backgroundColor = "black";
       btn.style.color = "white";
+      btn.style.cursor = "pointer";
     }
   };
 
@@ -226,72 +207,6 @@ const toggleSaveButton = (input1ID, input2ID, buttonID) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   toggleSaveButton("name", "job", "save-button");
-});
-
-/*       <-------------------Codigo--------------------->        */
-
-/* Profile edit */
-const profileEdit = {
-  open: openDialog,
-  close: closeDialog,
-  opacity: opacityPage,
-  info: saveInfo,
-  btn: toggleSaveButton,
-};
-
-document.getElementById("edit-button-open").addEventListener("click", () => {
-  profileEdit.open("modal-edit");
-});
-
-document.getElementById("edit-button-close").addEventListener("click", () => {
-  profileEdit.close("modal-edit");
-});
-
-document.getElementById("modal-edit").addEventListener("keydown", (e) => {
-  if (e.key === "Escape") profileEdit.close("modal-edit");
-});
-
-document.getElementById("name").addEventListener("input", () => {
-  profileEdit.btn("name", "job", "save-button");
-});
-
-document.getElementById("job").addEventListener("input", () => {
-  profileEdit.btn("name", "job", "save-button");
-});
-
-document
-  .getElementById("save-button")
-  .addEventListener("click", function (evt) {
-    saveInfo(evt, "name", "job", "profile-name", "profile-job");
-    profileEdit.close("modal-edit");
-  });
-
-/*Profile Add */
-const profileAdd = {
-  open: openDialog,
-  close: closeDialog,
-  opacity: opacityPage,
-  btn: toggleSaveButton,
-};
-
-document.getElementById("add-button-open").addEventListener("click", () => {
-  profileAdd.open("modal-add");
-});
-
-document.getElementById("add-button-close").addEventListener("click", () => {
-  profileAdd.close("modal-add");
-});
-
-document.getElementById("modal-add").addEventListener("keydown", (e) => {
-  if (e.key === "Escape") profileAdd.close("modal-add");
-});
-
-document.getElementById("title").addEventListener("input", () => {
-  profileAdd.btn("title", "imageURL", "save-button-add");
-});
-
-document.getElementById("imageURL").addEventListener("input", () => {
-  profileAdd.btn("title", "imageURL", "save-button-add");
 });
 
 /* Profile delete*/
@@ -331,31 +246,6 @@ document.addEventListener("DOMContentLoaded", () => {
       popImage.classList.remove("element__modal_horizontal-content");
     }
   };
-});
-
-/* Script para cerrar dialogs clickeando afuera */
-
-document.addEventListener("click", (e) => {
-  const modalEdit = document.getElementById("modal-edit");
-  const modalAdd = document.getElementById("modal-add");
-  const isEditOpen = modalEdit.open;
-  const isAddOpen = modalAdd.open;
-
-  if (
-    isEditOpen &&
-    !modalEdit.contains(e.target) &&
-    e.target.id !== "edit-button-open"
-  ) {
-    profileEdit.close("modal-edit");
-  }
-
-  if (
-    isAddOpen &&
-    !modalAdd.contains(e.target) &&
-    e.target.id !== "add-button-open"
-  ) {
-    profileAdd.close("modal-add");
-  }
 });
 
 /* Form Validator */
