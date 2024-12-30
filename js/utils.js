@@ -1,9 +1,21 @@
 import FormValidator from "./FormValidator.js";
-import { saveInfo, toggleSaveButton, opacityPage } from "./script.js";
+import { saveInfo, opacityPage } from "./script.js";
 
 /* Funcion para abrir Dialogs*/
-function openDialog(dialogID) {
+function openDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
+  const form = document.getElementById(formID);
+
+  if (form) {
+    const formValidation = new FormValidator(form, {
+      inputSelector: ".profile__edit-form-input",
+      inputErrorClass: "form__input_type_error",
+      errorClass: "form__input-error_active",
+      buttonSelector: ".profile__edit-form-button",
+    });
+    formValidation.enableValidation();
+  }
+
   if (dialog) {
     dialog.show();
     opacityPage(true);
@@ -53,11 +65,10 @@ const profileEdit = {
   close: closeDialog,
   opacity: opacityPage,
   info: saveInfo,
-  btn: toggleSaveButton,
 };
 
 document.getElementById("edit-button-open").addEventListener("click", () => {
-  profileEdit.open("modal-edit");
+  profileEdit.open("modal-edit", "profile-form");
 });
 
 document.getElementById("edit-button-close").addEventListener("click", () => {
@@ -66,14 +77,6 @@ document.getElementById("edit-button-close").addEventListener("click", () => {
 
 document.getElementById("modal-edit").addEventListener("keydown", (e) => {
   if (e.key === "Escape") profileEdit.close("modal-edit");
-});
-
-document.getElementById("name").addEventListener("input", () => {
-  profileEdit.btn("name", "job", "save-button");
-});
-
-document.getElementById("job").addEventListener("input", () => {
-  profileEdit.btn("name", "job", "save-button");
 });
 
 document
@@ -88,12 +91,10 @@ const profileAdd = {
   open: openDialog,
   close: closeDialog,
   opacity: opacityPage,
-  btn: toggleSaveButton,
 };
 
 document.getElementById("add-button-open").addEventListener("click", () => {
-  profileAdd.open("modal-add");
-  profileAdd.btn("title", "imageURL", "save-button-add");
+  profileAdd.open("modal-add", "add-card-form");
 });
 
 document.getElementById("add-button-close").addEventListener("click", () => {
@@ -102,12 +103,4 @@ document.getElementById("add-button-close").addEventListener("click", () => {
 
 document.getElementById("modal-add").addEventListener("keydown", (e) => {
   if (e.key === "Escape") profileAdd.close("modal-add");
-});
-
-document.getElementById("title").addEventListener("input", () => {
-  profileAdd.btn("title", "imageURL", "save-button-add");
-});
-
-document.getElementById("imageURL").addEventListener("input", () => {
-  profileAdd.btn("title", "imageURL", "save-button-add");
 });

@@ -179,37 +179,6 @@ function setupImageModal(
   });
 }
 
-/* Funcion para desactivar boton */
-
-export const toggleSaveButton = (input1ID, input2ID, buttonID) => {
-  const inp1 = document.getElementById(input1ID);
-  const inp2 = document.getElementById(input2ID);
-  const btn = document.getElementById(buttonID);
-
-  const validarInputs = () => {
-    if (!inp1.validity.valid || !inp2.validity.valid) {
-      btn.disabled = true;
-      btn.style.backgroundColor = "transparent";
-      btn.style.color = "#c4c4c4";
-      btn.style.cursor = "not-allowed";
-    } else {
-      btn.disabled = false;
-      btn.style.backgroundColor = "black";
-      btn.style.color = "white";
-      btn.style.cursor = "pointer";
-    }
-  };
-
-  inp1.addEventListener("input", validarInputs);
-  inp2.addEventListener("input", validarInputs);
-
-  validarInputs();
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  toggleSaveButton("name", "job", "save-button");
-});
-
 /* Profile delete*/
 document.addEventListener("click", function (event) {
   if (event.target.matches(".element__button-delete *")) {
@@ -248,26 +217,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 });
-
-/* Form Validator */
-
-const form1 = document.getElementById("profile-form");
-const form2 = document.getElementById("add-card-form");
-
-const infoValidation = new FormValidator(form1, {
-  inputSelector: ".profile__edit-form-input",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-  buttonSelector: "profile__edit-form-button",
-});
-
-infoValidation.enableValidation();
-
-const imageValidation = new FormValidator(form2, {
-  inputSelector: ".profile__edit-form-input",
-  inputErrorClass: "form__input_type_error",
-  errorClass: "form__input-error_active",
-  buttonSelector: "profile__edit-form-button",
-});
-
-imageValidation.enableValidation();

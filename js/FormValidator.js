@@ -31,10 +31,12 @@ export default class FormValidator {
       buttonElement.disabled = true;
       buttonElement.style.backgroundColor = "transparent";
       buttonElement.style.color = "#c4c4c4";
+      buttonElement.pointer = "not-allowed";
     } else {
       buttonElement.disabled = false;
       buttonElement.style.backgroundColor = "black";
       buttonElement.style.color = "white";
+      buttonElement.pointer = "cursor";
     }
   }
 
