@@ -6,7 +6,9 @@ function openDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
   const form = document.getElementById(formID);
 
-  if (form) {
+  if (dialog && form) {
+    dialog.show();
+
     const formValidation = new FormValidator(form, {
       inputSelector: ".profile__edit-form-input",
       inputErrorClass: "form__input_type_error",
@@ -14,10 +16,12 @@ function openDialog(dialogID, formID) {
       buttonSelector: ".profile__edit-form-button",
     });
     formValidation.enableValidation();
-  }
 
-  if (dialog) {
-    dialog.show();
+    formValidation.toggleSaveButton(
+      formValidation.inputList,
+      formValidation.buttonElement
+    );
+
     opacityPage(true);
   }
 }
