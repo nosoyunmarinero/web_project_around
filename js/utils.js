@@ -28,11 +28,13 @@ function openDialog(dialogID, formID) {
 
 /* Funcion para cerrar Dialogs*/
 
-export function closeDialog(dialogID) {
+export function closeDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
+  const form = document.getElementById(formID);
   if (dialog) {
     dialog.close();
     opacityPage(false);
+    form.reset();
   }
 }
 
@@ -76,7 +78,7 @@ document.getElementById("edit-button-open").addEventListener("click", () => {
 });
 
 document.getElementById("edit-button-close").addEventListener("click", () => {
-  profileEdit.close("modal-edit");
+  profileEdit.close("modal-edit", "profile-form");
 });
 
 document.getElementById("modal-edit").addEventListener("keydown", (e) => {
@@ -102,7 +104,7 @@ document.getElementById("add-button-open").addEventListener("click", () => {
 });
 
 document.getElementById("add-button-close").addEventListener("click", () => {
-  profileAdd.close("modal-add");
+  profileAdd.close("modal-add", "add-card-form");
 });
 
 document.getElementById("modal-add").addEventListener("keydown", (e) => {
