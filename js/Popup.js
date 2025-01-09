@@ -1,32 +1,28 @@
-import FormValidator from "./FormValidator";
-
-class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this._PopupSelector = document.querySelector(popupSelector);
   }
 
   // Funcion para abrir Dialogs
-  openDialog(dialogID, formID, { Data }) {
+  openDialog(dialogID, formID) {
     const dialog = document.getElementById(dialogID);
     const form = document.getElementById(formID);
 
-    if (dialog && form) {
+    if (dialog) {
       dialog.show();
 
-      const formValidation = new FormValidator(form, {
-        inputSelector: ".profile__edit-form-input",
-        inputErrorClass: "form__input_type_error",
-        errorClass: "form__input-error_active",
-        buttonSelector: ".profile__edit-form-button",
-      });
-      formValidation.enableValidation();
-
-      formValidation.toggleSaveButton(
-        formValidation.inputList,
-        formValidation.buttonElement
-      );
-
       opacityPage(true);
+    }
+  }
+
+  // Cerrar dialog
+  closeDialog(dialogID, formID) {
+    const dialog = document.getElementById(dialogID);
+    const form = document.getElementById(formID);
+    if (dialog) {
+      dialog.close();
+      opacityPage(false);
+      form.reset();
     }
   }
 }

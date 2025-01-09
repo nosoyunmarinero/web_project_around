@@ -1,7 +1,7 @@
 import FormValidator from "./FormValidator.js";
 import { saveInfo, opacityPage } from "./script.js";
 
-/* Funcion para abrir Dialogs*/
+/* Funcion para abrir Dialogs*
 function openDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
   const form = document.getElementById(formID);
@@ -26,7 +26,7 @@ function openDialog(dialogID, formID) {
   }
 }
 
-/* Funcion para cerrar Dialogs*/
+/* Funcion para cerrar Dialogs*
 
 export function closeDialog(dialogID, formID) {
   const dialog = document.getElementById(dialogID);
@@ -38,7 +38,7 @@ export function closeDialog(dialogID, formID) {
   }
 }
 
-/* Script para cerrar dialogs clickeando afuera */
+/* Script para cerrar dialogs clickeando afuera *
 
 document.addEventListener("click", (e) => {
   const modalEdit = document.getElementById("modal-edit");

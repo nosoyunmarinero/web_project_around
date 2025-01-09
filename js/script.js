@@ -1,8 +1,8 @@
 //Imports
 import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
-import { closeDialog } from "./utils.js";
 import Section from "./Section.js";
+import Popup from "./Popup.js";
 
 /* Cards iniciales */
 
@@ -41,7 +41,7 @@ const initialCards = [
 
 /*  <-------------------Funciones--------------------->
 
-/* Función para cargar las tarjetas iniciales */
+/* Instancia de cards iniciales */
 const cardList = new Section(
   {
     item: initialCards,
@@ -53,11 +53,22 @@ const cardList = new Section(
   },
   ".element-list__item"
 );
-
 cardList.renderItems();
 
-/* Funcion para agregar cards */
+/* Instancia de FormValidator */
+const formValidation = new FormValidator(form, {
+  inputSelector: ".profile__edit-form-input",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+  buttonSelector: ".profile__edit-form-button",
+});
+formValidation.enableValidation();
 
+formValidation.toggleSaveButton(
+  formValidation.inputList,
+  formValidation.buttonElement
+);
+/* Funcion para agregar cards */
 document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("save-button-add")
