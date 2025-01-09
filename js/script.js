@@ -2,6 +2,7 @@
 import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
 import { closeDialog } from "./utils.js";
+import Section from "./Section.js";
 
 /* Cards iniciales */
 
@@ -41,13 +42,19 @@ const initialCards = [
 /*  <-------------------Funciones--------------------->
 
 /* Función para cargar las tarjetas iniciales */
+const cardList = new Section(
+  {
+    item: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, "#template-selector");
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    },
+  },
+  ".element-list__item"
+);
 
-initialCards.forEach((item) => {
-  const card = new Card(item, "#template-selector");
-  const cardElement = card.generateCard();
-
-  document.querySelector(".element-list__item").append(cardElement);
-});
+cardList.renderItems();
 
 /* Funcion para agregar cards */
 
