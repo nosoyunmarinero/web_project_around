@@ -1,28 +1,75 @@
 export default class Popup {
-  constructor(popupSelector) {
-    this._PopupSelector = document.querySelector(popupSelector);
+  constructor(selectors) {
+    this._selectors = selectors;
+    this.setEventListeners();
   }
 
   // Funcion para abrir Dialogs
-  openDialog(dialogID, formID) {
-    const dialog = document.getElementById(dialogID);
-    const form = document.getElementById(formID);
+  openDialog() {
+    const dialog = document.querySelector(this._selectors.dialogID);
 
     if (dialog) {
       dialog.show();
-
-      opacityPage(true);
+      this.opacityPage(true);
     }
   }
 
   // Cerrar dialog
-  closeDialog(dialogID, formID) {
-    const dialog = document.getElementById(dialogID);
-    const form = document.getElementById(formID);
+  closeDialog() {
+    const dialog = document.querySelector(this._selectors.dialogID);
+    const form = document.querySelector(this._selectors.formID);
     if (dialog) {
       dialog.close();
-      opacityPage(false);
+      this.opacityPage(false);
       form.reset();
     }
+  }
+
+  //Opacidad de la pagina
+  opacityPage(dim) {
+    const elements = document.querySelectorAll(
+      ".profile, .header, .elements, .footer, .element-list__item"
+    );
+    elements.forEach((element) => {
+      element.style.opacity = dim ? "0.5" : "1";
+    });
+  }
+
+  // cerrar popup con ESC
+  _handleEscClose(event) {
+    if (event.key === "Escape") {
+      this.closeDialog();
+    }
+  }
+
+  setEventListeners() {
+    document
+      .querySelector(this._selectors.openButtonElement)
+      .addEventListener("click", () => {
+        console.log("abrir");
+        this.openDialog();
+      });
+
+    document
+      .querySelector(this._selectors.closeButtonElement)
+      .addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.closeDialog();
+      });
+
+    document.addEventListener("keydown", (event) =>
+      this._handleEscClose(event)
+    );
+
+    document.addEventListener("click", (e) => {
+      const dialog = document.getElementById(this.dialogID);
+      if (
+        dialog &&
+        !dialog.contains(e.target) &&
+        !document.querySelector(this.openButtonElement).contains(e.target)
+      ) {
+        this.closeDialog(); // Cierra el popup si se hace clic fuera
+      }
+    });
   }
 }

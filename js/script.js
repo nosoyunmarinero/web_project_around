@@ -55,19 +55,33 @@ const cardList = new Section(
 );
 cardList.renderItems();
 
-/* Instancia de FormValidator */
-const formValidation = new FormValidator(form, {
+/* Instancias de FormValidator */
+const formValidationProfile = new FormValidator("#profile-form", {
   inputSelector: ".profile__edit-form-input",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_active",
   buttonSelector: ".profile__edit-form-button",
 });
-formValidation.enableValidation();
+formValidationProfile.enableValidation();
 
-formValidation.toggleSaveButton(
-  formValidation.inputList,
-  formValidation.buttonElement
+formValidationProfile.toggleSaveButton(
+  formValidationProfile.inputList,
+  formValidationProfile.buttonElement
 );
+
+const formValidationImage = new FormValidator("#modal-add", {
+  inputSelector: ".profile__edit-form-input",
+  inputErrorClass: "#title-error",
+  errorClass: "form__input-error_active",
+  buttonSelector: ".profile__edit-form-button",
+});
+formValidationImage.enableValidation();
+
+formValidationImage.toggleSaveButton(
+  formValidationImage.inputList,
+  formValidationImage.buttonElement
+);
+
 /* Funcion para agregar cards */
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -136,15 +150,6 @@ function deleteCard(event) {
   }
 }
 
-/* Funcion oscurecer pagina */
-export function opacityPage(dim) {
-  const elements = document.querySelectorAll(
-    ".profile, .header, .elements, .footer, .element-list__item"
-  );
-  elements.forEach((element) => {
-    element.style.opacity = dim ? "0.5" : "1";
-  });
-}
 /*Funcion para abrir imagenes*/
 
 function setupImageModal(

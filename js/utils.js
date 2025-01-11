@@ -1,5 +1,6 @@
 import FormValidator from "./FormValidator.js";
-import { saveInfo, opacityPage } from "./script.js";
+import Popup from "./Popup.js";
+import { saveInfo } from "./script.js";
 
 /* Funcion para abrir Dialogs*
 function openDialog(dialogID, formID) {
@@ -65,7 +66,7 @@ document.addEventListener("click", (e) => {
 
 /*       <-------------------Controladores de eventos--------------------->        */
 
-/* Profile edit */
+/* Profile edit *
 const profileEdit = {
   open: openDialog,
   close: closeDialog,
@@ -92,7 +93,7 @@ document
     profileEdit.close("modal-edit");
   });
 
-/*Profile Add */
+/*Profile Add *
 const profileAdd = {
   open: openDialog,
   close: closeDialog,
@@ -109,4 +110,19 @@ document.getElementById("add-button-close").addEventListener("click", () => {
 
 document.getElementById("modal-add").addEventListener("keydown", (e) => {
   if (e.key === "Escape") profileAdd.close("modal-add");
+});
+*/
+
+const profileEdit = new Popup({
+  dialogID: "#modal-edit",
+  formID: "#profile-form",
+  openButtonElement: "#edit-button-open",
+  closeButtonElement: "#edit-button-close",
+});
+
+const profileAdd = new Popup({
+  dialogID: "#modal-add",
+  formID: "#profile-form",
+  openButtonElement: "#add-button-open",
+  closeButtonElement: "#add-button-close",
 });
