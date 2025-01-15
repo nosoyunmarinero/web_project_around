@@ -3,6 +3,7 @@ import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
+import PopupWithImage from "./PopupWithForm.js";
 
 /* Cards iniciales */
 
@@ -39,9 +40,9 @@ const initialCards = [
   },
 ];
 
-/*  <-------------------Funciones--------------------->
+/* Instancias */
 
-/* Instancia de cards iniciales */
+// Instancia de cards iniciales
 const cardList = new Section(
   {
     item: initialCards,
@@ -54,6 +55,39 @@ const cardList = new Section(
   ".element-list__item"
 );
 cardList.renderItems();
+
+// Instancia para abrir Popup editar perfil
+const profileEdit = new Popup({
+  dialogID: "#modal-edit",
+  formID: "#profile-form",
+  openButtonElement: "#edit-button-open",
+  closeButtonElement: "#edit-button-close",
+});
+
+// Instancia para abrir Popup agregar imagen
+
+const profileAdd = new Popup({
+  dialogID: "#modal-add",
+  formID: "#profile-form",
+  openButtonElement: "#add-button-open",
+  closeButtonElement: "#add-button-close",
+});
+
+// Instancia para abrir imagenes
+
+const openImage = new PopupWithImage(
+  {
+    dialogID: "#modal-image",
+    openButtonElement: "#open-image",
+    closeButtonElement: "#dialog-close-button",
+  },
+  {
+    imageTemplateID: "#dialog-image",
+    imageSrcID: ".element__image",
+    titleTemplateID: "#dialog-title",
+    titleSrcID: "#card-title",
+  }
+);
 
 /* Instancias de FormValidator */
 const formValidationProfile = new FormValidator("#profile-form", {
@@ -82,6 +116,13 @@ formValidationImage.toggleSaveButton(
   formValidationImage.buttonElement
 );
 
+//
+//
+//
+//
+//
+//
+/* Funciones que se deben ir eliminando */
 /* Funcion para agregar cards */
 document.addEventListener("DOMContentLoaded", function () {
   document
@@ -150,7 +191,7 @@ function deleteCard(event) {
   }
 }
 
-/*Funcion para abrir imagenes*/
+/*Funcion para abrir imagenes
 
 function setupImageModal(
   buttonSelector,
@@ -174,19 +215,16 @@ function setupImageModal(
       modalImage.src = imageURL;
       modalTitle.textContent = title;
       imageModal.show();
-      opacityPage(true);
     });
   });
 
   closeModalButton.addEventListener("click", function () {
     imageModal.close();
-    opacityPage(false);
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       imageModal.close();
-      opacityPage(false);
     }
   });
 
@@ -197,7 +235,6 @@ function setupImageModal(
       !e.target.closest(buttonSelector)
     ) {
       imageModal.close();
-      opacityPage(false);
     }
   });
 }
@@ -209,7 +246,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
-/*Image show*/
+/*Image show*
 document.addEventListener("DOMContentLoaded", function () {
   setupImageModal(
     ".element__button-image",

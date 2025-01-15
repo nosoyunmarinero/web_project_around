@@ -21,7 +21,9 @@ export default class Popup {
     if (dialog) {
       dialog.close();
       this.opacityPage(false);
-      form.reset();
+      if (form) {
+        form.reset();
+      }
     }
   }
 
