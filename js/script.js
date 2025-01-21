@@ -3,7 +3,7 @@ import FormValidator from "./FormValidator.js";
 import { Card } from "./Card.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
-import PopupWithImage from "./PopupWithImage.js";
+import PopupWithImage from "./PopUpWithImage.js";
 
 /* Cards iniciales */
 
@@ -86,6 +86,7 @@ const openImage = new PopupWithImage(
     imageSrcID: ".element__image",
     titleTemplateID: "#dialog-title",
     titleSrcID: "#card-title",
+    templateID: "#template-selector",
   }
 );
 
@@ -239,13 +240,6 @@ function setupImageModal(
   });
 }
 
-/* Profile delete*/
-document.addEventListener("click", function (event) {
-  if (event.target.matches(".element__button-delete *")) {
-    deleteCard(event);
-  }
-});
-
 /*Image show*
 document.addEventListener("DOMContentLoaded", function () {
   setupImageModal(
@@ -255,6 +249,13 @@ document.addEventListener("DOMContentLoaded", function () {
     "#dialog-title",
     "#dialog-close-button"
   );
+});
+
+/* Profile delete*/
+document.addEventListener("click", function (event) {
+  if (event.target.matches(".element__button-delete *")) {
+    deleteCard(event);
+  }
 });
 
 /*Script para ancho de imagen*/

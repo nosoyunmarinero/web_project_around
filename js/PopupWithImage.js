@@ -8,19 +8,27 @@ export default class PopupWithImage extends Popup {
 
   openDialog() {
     super.openDialog();
-
-    let imageTemplate = document.querySelector(
-      this._imageSelectors.imageTemplateID
+    const imageSelector = document.querySelector(
+      this._imageSelectors.imageSelector
     );
-    let imageSrc = document.querySelector(this._imageSelectors.imageSrcID).src;
-    let titleTemplate = document.querySelector(
-      this._imageSelectors.titleTemplateID
-    );
-    let titleSrc = document.querySelector(
-      this._imageSelectors.titleSrcID
-    ).textContent;
+    const titleSelector = document.querySelector(this._selectors.titleSelector);
+  }
 
-    imageTemplate.src = imageSrc;
-    titleTemplate.textContent = titleSrc;
+  setEventListeners() {
+    super.setEventListeners;
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(this._selectors.openButtonElement)) {
+        console.log("abrir dialog con imagen");
+        this.openDialog();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(this._selectors.closeButtonElement)) {
+        console.log("cerrar dialog con imagen");
+        this.closeDialog();
+      }
+    });
   }
 }
