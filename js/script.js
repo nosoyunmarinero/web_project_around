@@ -75,20 +75,15 @@ const profileAdd = new Popup({
 
 // Instancia para abrir imagenes
 
-const openImage = new PopupWithImage(
-  {
-    dialogID: "#modal-image",
-    openButtonElement: "#open-image",
-    closeButtonElement: "#dialog-close-button",
-  },
-  {
-    imageTemplateID: "#dialog-image",
-    imageSrcID: ".element__image",
-    titleTemplateID: "#dialog-title",
-    titleSrcID: "#card-title",
-    templateID: "#template-selector",
-  }
-);
+const openImage = new PopupWithImage({
+  dialogID: "#modal-image",
+  openButtonElement: "#open-image",
+  closeButtonElement: ".element__close-button",
+  buttonSelector: ".element__button-image",
+  dialogSelector: "#modal-image",
+  imageSelector: "#dialog-image",
+  titleSelector: "#dialog-title",
+});
 
 /* Instancias de FormValidator */
 const formValidationProfile = new FormValidator("#profile-form", {

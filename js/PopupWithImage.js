@@ -1,28 +1,44 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
-  constructor(selectors, imageSelectors) {
+  constructor(selectors) {
     super(selectors);
-    this._imageSelectors = imageSelectors;
   }
 
   openDialog() {
     super.openDialog();
-    const imageSelector = document.querySelector(
-      this._imageSelectors.imageSelector
+
+    const imageButtons = document.querySelectorAll(
+      this._selectors.buttonSelector
     );
-    const titleSelector = document.querySelector(this._selectors.titleSelector);
+    const imageModal = document.querySelector(this._selectors.dialogSelector);
+    const modalImage = document.querySelector(this._selectors.imageSelector);
+    const modalTitle = document.querySelector(this._selectors.titleSelector);
+
+    imageButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const imageURL = this.querySelector(".element__image").src;
+        const title =
+          this.closest(".element").querySelector("#card-title").textContent;
+
+        modalImage.src = imageURL;
+        modalTitle.textContent = title;
+        imageModal.show();
+      });
+    });
   }
 
   setEventListeners() {
     super.setEventListeners;
 
-    document.addEventListener("click", (event) => {
-      if (event.target.closest(this._selectors.openButtonElement)) {
-        console.log("abrir dialog con imagen");
-        this.openDialog();
-      }
-    });
+    document.addEventListener("DOMContentLoaded", () =>
+      document.addEventListener("click", (event) => {
+        if (event.target.closest(this._selectors.openButtonElement)) {
+          console.log("abrir dialog con imagen");
+          this.openDialog();
+        }
+      })
+    );
 
     document.addEventListener("click", (event) => {
       if (event.target.closest(this._selectors.closeButtonElement)) {
