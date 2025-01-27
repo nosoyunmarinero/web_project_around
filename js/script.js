@@ -4,6 +4,7 @@ import { Card } from "./Card.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopUpWithImage.js";
+import PopUpWithForm from "./PopUpWithForm.js";
 
 /* Cards iniciales */
 
@@ -85,6 +86,8 @@ const openImage = new PopupWithImage({
   titleSelector: "#dialog-title",
 });
 
+const saveInfo = PopUpWithForm({});
+
 /* Instancias de FormValidator */
 const formValidationProfile = new FormValidator("#profile-form", {
   inputSelector: ".profile__edit-form-input",
@@ -156,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-/* Función para cambiar la información del perfil */
+/* Función para cambiar la información del perfil *
 export const saveInfo = (
   evt,
   field1ID,
