@@ -1,7 +1,7 @@
 .element__modal {
-  max-width: 816 px;
   position: fixed;
   bottom: 110px;
+  top: 130px;
   border-radius: 8px;
   border: none;
   padding: 0;
@@ -10,14 +10,10 @@
   margin-left: auto;
   margin-right: auto;
 }
-.element__modal_vertical-image {
-  max-height: 75vh;
-}
 
-.element__modal_horizontal-image {
-  max-height: 75vh;
+.element__modal-image {
+  max-width: 400px;
 }
-
 .element__modal-title {
   color: white;
   font-family: "inter", sans-serif;
