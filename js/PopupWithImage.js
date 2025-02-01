@@ -18,6 +18,7 @@ export default class PopupWithImage extends Popup {
     imageButtons.forEach((button) => {
       button.addEventListener("click", function () {
         const imageURL = this.querySelector(".element__image").src;
+        console.log("imageURL", imageURL);
         const title =
           this.closest(".element").querySelector("#card-title").textContent;
 
@@ -29,21 +30,19 @@ export default class PopupWithImage extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners;
+    super.setEventListeners();
 
-    document.addEventListener("DOMContentLoaded", () =>
-      document.addEventListener("click", (event) => {
-        if (event.target.closest(this._selectors.openButtonElement)) {
-          console.log("abrir dialog con imagen");
-          this.openDialog();
-        }
-      })
-    );
+    document.addEventListener("click", (event) => {
+      if (event.target.closest(this._selectors.openButtonElement)) {
+        console.log("abrir dialog con imagen");
+        this.openDialog();
+      }
+    });
 
     document.addEventListener("click", (event) => {
       if (event.target.closest(this._selectors.closeButtonElement)) {
         console.log("cerrar dialog con imagen");
-        this.closeDialog();
+        super.closeDialog();
       }
     });
   }

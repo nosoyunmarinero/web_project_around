@@ -45,6 +45,7 @@ export default class Popup {
   }
 
   setEventListeners() {
+    console.log("this._selectors", this._selectors);
     document
       .querySelector(this._selectors.openButtonElement)
       .addEventListener("click", () => {

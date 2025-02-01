@@ -86,7 +86,7 @@ const openImage = new PopupWithImage({
   imageSelector: "#dialog-image",
   titleSelector: "#dialog-title",
 });
-
+openImage.setEventListeners();
 /* Instancias de FormValidator */
 const formValidationProfile = new FormValidator("#profile-form", {
   inputSelector: ".profile__edit-form-input",
