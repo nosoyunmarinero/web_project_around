@@ -16,9 +16,8 @@ export default class PopupWithImage extends Popup {
 
     const imageURL = document.querySelector(".element__image").src;
     console.log("imageURL", imageURL);
-    const title = document
-      .closest(".element")
-      .querySelector("#card-title").textContent;
+    const title = document.querySelector("#card-title").textContent;
+    console.log("title", title);
 
     modalImage.src = imageURL;
     modalTitle.textContent = title;
