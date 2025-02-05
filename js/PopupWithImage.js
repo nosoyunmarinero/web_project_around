@@ -7,26 +7,21 @@ export default class PopupWithImage extends Popup {
 
   openDialog() {
     super.openDialog();
-
     const imageButtons = document.querySelectorAll(
       this._selectors.buttonSelector
     );
-    const imageModal = document.querySelector(this._selectors.dialogSelector);
+
     const modalImage = document.querySelector(this._selectors.imageSelector);
     const modalTitle = document.querySelector(this._selectors.titleSelector);
 
-    imageButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const imageURL = this.querySelector(".element__image").src;
-        console.log("imageURL", imageURL);
-        const title =
-          this.closest(".element").querySelector("#card-title").textContent;
+    const imageURL = document.querySelector(".element__image").src;
+    console.log("imageURL", imageURL);
+    const title = document
+      .closest(".element")
+      .querySelector("#card-title").textContent;
 
-        modalImage.src = imageURL;
-        modalTitle.textContent = title;
-        imageModal.show();
-      });
-    });
+    modalImage.src = imageURL;
+    modalTitle.textContent = title;
   }
 
   setEventListeners() {
