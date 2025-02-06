@@ -45,19 +45,23 @@ export default class Popup {
   }
 
   setEventListeners() {
-    document
-      .querySelector(this._selectors.openButtonElement)
-      .addEventListener("click", () => {
-        console.log("abrir");
-        this.openDialog();
-      });
+    document.addEventListener("click", (event) => {
+      const openButton = event.target.closest(
+        this._selectors.openButtonElement
+      );
+      if (openButton) {
+        console.log("abrir card");
+        this.openDialog(event);
+      }
 
-    document
-      .querySelector(this._selectors.closeButtonElement)
-      .addEventListener("click", (e) => {
-        console.log("cerrar");
-        this.closeDialog();
-      });
+      const closeButton = event.target.closest(
+        this._selectors.closeButtonElement
+      );
+      if (closeButton) {
+        console.log("cerrar card");
+        this.closeDialog(event);
+      }
+    });
 
     document.addEventListener("keydown", (event) =>
       this._handleEscClose(event)

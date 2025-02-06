@@ -19,10 +19,6 @@ export default class PopupWithImage extends Popup {
       const titleElement =
         clickedCard.querySelector(".element__title").textContent;
 
-      // Aquí puedes hacer lo que necesites con los elementos de la card
-      console.log("Imagen:", imgElement);
-      console.log("Título:", titleElement);
-
       const imgContainer = document.querySelector(".element__modal-image");
       const titleContainer = document.querySelector(".element__modal-title");
 
@@ -32,28 +28,6 @@ export default class PopupWithImage extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners();
-
-    const closeButtons = document.querySelectorAll(
-      this._selectors.closeButtonElement
-    );
-
-    const openButtons = document.querySelectorAll(
-      this._selectors.openButtonElement
-    );
-
-    openButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        console.log("abrir card");
-        this.openDialog(event); // Aquí pasamos el 'event'
-      });
-    });
-
-    closeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        console.log("Cerrar card");
-        this.closeDialog();
-      });
-    });
+    super.setEventListeners(); // Llama a setEventListeners de la clase base
   }
 }
