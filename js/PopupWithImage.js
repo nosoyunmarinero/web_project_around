@@ -5,39 +5,55 @@ export default class PopupWithImage extends Popup {
     super(selectors);
   }
 
-  openDialog() {
+  openDialog(event) {
     super.openDialog();
-    const imageButtons = document.querySelectorAll(
-      this._selectors.buttonSelector
-    );
 
-    const modalImage = document.querySelector(this._selectors.imageSelector);
-    const modalTitle = document.querySelector(this._selectors.titleSelector);
+    // Asegurarnos de que event.target existe
+    const clickedButton = event.target;
 
-    const imageURL = document.querySelector(".element__image").src;
-    console.log("imageURL", imageURL);
-    const title = document.querySelector("#card-title").textContent;
-    console.log("title", title);
+    // Verificar si el clickedButton es parte de una card
+    const clickedCard = clickedButton.closest(".element-list__item .element");
 
-    modalImage.src = imageURL;
-    modalTitle.textContent = title;
+    if (clickedCard) {
+      const imgElement = clickedCard.querySelector(".element__image").src;
+      const titleElement =
+        clickedCard.querySelector(".element__title").textContent;
+
+      // Aquí puedes hacer lo que necesites con los elementos de la card
+      console.log("Imagen:", imgElement);
+      console.log("Título:", titleElement);
+
+      const imgContainer = document.querySelector(".element__modal-image");
+      const titleContainer = document.querySelector(".element__modal-title");
+
+      imgContainer.src = imgElement;
+      titleContainer.textContent = titleElement;
+    }
   }
 
   setEventListeners() {
     super.setEventListeners();
 
-    document.addEventListener("click", (event) => {
-      if (event.target.closest(this._selectors.openButtonElement)) {
-        console.log("abrir dialog con imagen");
-        this.openDialog();
-      }
+    const closeButtons = document.querySelectorAll(
+      this._selectors.closeButtonElement
+    );
+
+    const openButtons = document.querySelectorAll(
+      this._selectors.openButtonElement
+    );
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        console.log("abrir card");
+        this.openDialog(event); // Aquí pasamos el 'event'
+      });
     });
 
-    document.addEventListener("click", (event) => {
-      if (event.target.closest(this._selectors.closeButtonElement)) {
-        console.log("cerrar dialog con imagen");
-        super.closeDialog();
-      }
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        console.log("Cerrar card");
+        this.closeDialog();
+      });
     });
   }
 }

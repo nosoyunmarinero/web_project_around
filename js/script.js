@@ -4,8 +4,8 @@ import { Card } from "./Card.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopUpWithImage.js";
-import PopUpWithForm from "./PopUpWithForm.js";
-import UserInfo from "./UserInfo.js";
+//import PopUpWithForm from "./PopUpWithForm.js";
+//import UserInfo from "./UserInfo.js";
 
 /* Cards iniciales */
 
@@ -76,18 +76,14 @@ const profileAdd = new Popup({
 });
 
 // Instancia para abrir imagenes
-
 const openImage = new PopupWithImage({
-  dialogID: "#modal-image",
-  openButtonElement: "#open-image",
+  openButtonElement: ".element__button-image",
   closeButtonElement: ".element__close-button",
-  buttonSelector: ".element__button-image",
-  dialogSelector: "#modal-image",
-  imageSelector: "#dialog-image",
-  titleSelector: "#dialog-title",
+  dialogID: "#modal-image",
 });
-openImage.setEventListeners();
+
 /* Instancias de FormValidator */
+
 const formValidationProfile = new FormValidator("#profile-form", {
   inputSelector: ".profile__edit-form-input",
   inputErrorClass: "form__input_type_error",
@@ -115,18 +111,19 @@ formValidationImage.toggleSaveButton(
 );
 
 // Instancia pop up with form
-const popupForm = new PopUpWithForm((inputValues) => {
+
+/*const popupForm = new PopUpWithForm((inputValues) => {
   UserInfo.setUserInfo(inputValues);
 }, "#modal-edit");
-popupForm.setEventListeners();
+popupForm.setEventListeners();*/
 
 // Intancia userInfo
 
-const saveInfo = new UserInfo({
+/*const saveInfo = new UserInfo({
   nameSelector: ".profile__name",
   jobSelector: ".profile__about",
 });
-
+*/
 //
 //
 //
@@ -288,3 +285,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 });
+
+////////////////
