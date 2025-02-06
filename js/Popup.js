@@ -50,7 +50,7 @@ export default class Popup {
         this._selectors.openButtonElement
       );
       if (openButton) {
-        console.log("abrir card");
+        console.log("abrir");
         this.openDialog(event);
       }
 
@@ -58,7 +58,7 @@ export default class Popup {
         this._selectors.closeButtonElement
       );
       if (closeButton) {
-        console.log("cerrar card");
+        console.log("cerrar");
         this.closeDialog(event);
       }
     });
