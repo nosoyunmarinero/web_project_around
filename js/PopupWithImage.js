@@ -28,8 +28,6 @@ export default class PopupWithImage extends Popup {
   }
 
   setEventListeners() {
-    super.setEventListeners();
-
     document.addEventListener("click", (event) => {
       const openButton = event.target.closest(
         this._selectors.openButtonElement

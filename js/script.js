@@ -5,7 +5,7 @@ import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopUpWithImage.js";
 import PopUpWithForm from "./PopUpWithForm.js";
-//import UserInfo from "./UserInfo.js";
+import UserInfo from "./UserInfo.js";
 
 /* Cards iniciales */
 
@@ -112,15 +112,22 @@ formValidationImage.toggleSaveButton(
 
 // Instancia pop up with form
 
-const popupForm = new PopUpWithForm("#modal-edit");
+const popupForm = new PopUpWithForm(
+  (inputValues) => {
+    info.setUserInfo(inputValues);
+  },
+  "#modal-edit",
+  { dialogID: "#modal-edit" }
+);
+popupForm._getInputValues();
+popupForm.setEventListeners();
 
-// Intancia userInfo
-
-/*const saveInfo = new UserInfo({
-  nameSelector: ".profile__name",
-  jobSelector: ".profile__about",
+// instancia user info
+const info = new UserInfo({
+  nameSelector: "#profile-name",
+  jobSelector: "#profile-job",
 });
-*/
+
 //
 //
 //

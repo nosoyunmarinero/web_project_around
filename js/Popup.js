@@ -17,13 +17,9 @@ export default class Popup {
   // Cerrar dialog
   closeDialog() {
     const dialog = document.querySelector(this._selectors.dialogID);
-    const form = document.querySelector(this._selectors.formID);
     if (dialog) {
       dialog.close();
       this.opacityPage(false);
-      if (form) {
-        form.reset();
-      }
     }
   }
 
