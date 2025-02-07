@@ -4,7 +4,7 @@ import { Card } from "./Card.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopUpWithImage.js";
-//import PopUpWithForm from "./PopUpWithForm.js";
+import PopUpWithForm from "./PopUpWithForm.js";
 //import UserInfo from "./UserInfo.js";
 
 /* Cards iniciales */
@@ -112,10 +112,7 @@ formValidationImage.toggleSaveButton(
 
 // Instancia pop up with form
 
-/*const popupForm = new PopUpWithForm((inputValues) => {
-  UserInfo.setUserInfo(inputValues);
-}, "#modal-edit");
-popupForm.setEventListeners();*/
+const popupForm = new PopUpWithForm("#modal-edit");
 
 // Intancia userInfo
 

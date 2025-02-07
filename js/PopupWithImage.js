@@ -26,4 +26,26 @@ export default class PopupWithImage extends Popup {
       titleContainer.textContent = titleElement;
     }
   }
+
+  setEventListeners() {
+    super.setEventListeners();
+
+    document.addEventListener("click", (event) => {
+      const openButton = event.target.closest(
+        this._selectors.openButtonElement
+      );
+      if (openButton) {
+        console.log("abrir");
+        this.openDialog(event);
+      }
+
+      const closeButton = event.target.closest(
+        this._selectors.closeButtonElement
+      );
+      if (closeButton) {
+        console.log("cerrar");
+        this.closeDialog(event);
+      }
+    });
+  }
 }
