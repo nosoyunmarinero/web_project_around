@@ -6,6 +6,7 @@ import Popup from "./Popup.js";
 import PopupWithImage from "./PopUpWithImage.js";
 import PopUpWithForm from "./PopUpWithForm.js";
 import UserInfo from "./UserInfo.js";
+import deleteCard from "./utils.js";
 
 /* Cards iniciales */
 
@@ -120,7 +121,6 @@ const popupForm = new PopUpWithForm(
   { dialogID: "#modal-edit" }
 );
 popupForm._getInputValues();
-popupForm.setEventListeners();
 
 // instancia user info
 const info = new UserInfo({
@@ -171,123 +171,3 @@ document.addEventListener("DOMContentLoaded", function () {
       closeDialog("modal-add", "profile-form");
     });
 });
-
-/* Función para cambiar la información del perfil *
-export const saveInfo = (
-  evt,
-  field1ID,
-  field2ID,
-  displayField1ID,
-  displayField2ID
-) => {
-  evt.preventDefault();
-
-  const field1 = document.getElementById(field1ID);
-  const field2 = document.getElementById(field2ID);
-
-  const field1Value = field1.value;
-  const field2Value = field2.value;
-
-  const displayField1 = document.getElementById(displayField1ID);
-  const displayField2 = document.getElementById(displayField2ID);
-
-  displayField1.textContent = field1Value;
-  displayField2.textContent = field2Value;
-};
-
-/* Funcion para eliminar cards */
-function deleteCard(event) {
-  const cardToDelete = event.target.closest(".element");
-  if (cardToDelete) {
-    cardToDelete.remove();
-  }
-}
-
-/*Funcion para abrir imagenes
-
-function setupImageModal(
-  buttonSelector,
-  dialogSelector,
-  imageSelector,
-  titleSelector,
-  closeButtonSelector
-) {
-  const imageButtons = document.querySelectorAll(buttonSelector);
-  const imageModal = document.querySelector(dialogSelector);
-  const modalImage = document.querySelector(imageSelector);
-  const modalTitle = document.querySelector(titleSelector);
-  const closeModalButton = document.querySelector(closeButtonSelector);
-
-  imageButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const imageURL = this.querySelector(".element__image").src;
-      const title =
-        this.closest(".element").querySelector("#card-title").textContent;
-
-      modalImage.src = imageURL;
-      modalTitle.textContent = title;
-      imageModal.show();
-    });
-  });
-
-  closeModalButton.addEventListener("click", function () {
-    imageModal.close();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      imageModal.close();
-    }
-  });
-
-  document.addEventListener("click", function (e) {
-    if (
-      imageModal.open &&
-      !imageModal.contains(e.target) &&
-      !e.target.closest(buttonSelector)
-    ) {
-      imageModal.close();
-    }
-  });
-}
-
-/*Image show*
-document.addEventListener("DOMContentLoaded", function () {
-  setupImageModal(
-    ".element__button-image",
-    "#modal-image",
-    "#dialog-image",
-    "#dialog-title",
-    "#dialog-close-button"
-  );
-});
-
-/* Profile delete*/
-document.addEventListener("click", function (event) {
-  if (event.target.matches(".element__button-delete *")) {
-    deleteCard(event);
-  }
-});
-
-/*Script para ancho de imagen*/
-document.addEventListener("DOMContentLoaded", () => {
-  const popImage = document.getElementById("dialog-image");
-
-  popImage.onload = () => {
-    if (popImage.naturalWidth > popImage.naturalHeight) {
-      // Imagen horizontal
-      popImage.classList.add("element__modal_horizontal-image");
-      popImage.classList.add("element__modal_horizontal-content");
-      popImage.classList.remove("element__modal_vertical-image");
-      popImage.classList.remove("element__modal_vertical-content");
-    } else if (popImage.naturalHeight > popImage.naturalWidth) {
-      // Imagen vertical
-      popImage.classList.add("element__modal_vertical-image");
-      popImage.classList.add("element__modal_vertical-content");
-      popImage.classList.remove("element__modal_horizontal-image");
-      popImage.classList.remove("element__modal_horizontal-content");
-    }
-  };
-});
-
-////////////////
