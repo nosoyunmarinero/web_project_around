@@ -38,9 +38,9 @@ export default class PopUpWithForm extends Popup {
         .querySelector("form");
 
       form.addEventListener("submit", (event) => {
-        event.preventDefault(); // Evita el envío por defecto
-        const inputValues = this._getInputValues(); // Obtiene los valores
-        this._submitCallback(inputValues); // Llama al callback con los datos
+        event.preventDefault();
+        const inputValues = this._getInputValues();
+        this._submitCallback(inputValues);
         this.closeDialog();
       });
     });

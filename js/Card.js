@@ -1,10 +1,11 @@
 /* Cards iniciales */
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._image = data.image;
     this._title = data.title;
     this.isLiked = false;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   toggleLike() {
@@ -25,7 +26,8 @@ export class Card {
     this._element = this._getTemplate();
 
     this._element.querySelector(".element__title").textContent = this._title;
-    this._element.querySelector(".element__image").src = `${this._image}`;
+    const imgElement = this._element.querySelector(".element__image");
+    imgElement.src = this._image;
 
     const likeButton = this._element.querySelector(".element__button-like");
     const likeIcon = this._element.querySelector(".element__like-button");
