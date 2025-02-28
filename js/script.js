@@ -8,24 +8,39 @@ import PopUpWithForm from "./PopUpWithForm.js";
 import UserInfo from "./UserInfo.js";
 import deleteCard from "./utils.js";
 import { handleCardClick, addNewCard } from "./utils.js";
-import { initialCards } from "./constants.js";
+// import { initialCards } from "./constants.js";
 export { profileAdd, formValidationImage };
 
 /* Instancias */
 
-// Instancia de cards iniciales
-const cardList = new Section(
-  {
-    item: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, "#template-selector", handleCardClick);
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
+// API Cards
+
+function getCardsInfo() {
+  fetch("https://around-api.es.tripleten-services.com/v1/cards", {
+    headers: {
+      authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
     },
-  },
-  ".element-list__item"
-);
-cardList.renderItems();
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      // Instancia de cards iniciales
+      const cardList = new Section(
+        {
+          item: data,
+          renderer: (item) => {
+            const card = new Card(item, "#template-selector", handleCardClick);
+            const cardElement = card.generateCard();
+            cardList.addItem(cardElement);
+          },
+        },
+        ".element-list__item"
+      );
+      cardList.renderItems();
+    });
+}
+
+getCardsInfo();
 
 // Instancia para agregar nuevas cards
 const imageForm = document.querySelector("#add-card-form");
@@ -98,4 +113,6 @@ popupForm._getInputValues();
 const info = new UserInfo({
   nameSelector: "#profile-name",
   jobSelector: "#profile-job",
+  avatarSelector: ".profile__avatar",
 });
+info.getProfileInfo();

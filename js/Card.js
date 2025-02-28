@@ -1,8 +1,8 @@
 /* Cards iniciales */
 export class Card {
   constructor(data, templateSelector, handleCardClick) {
-    this._image = data.image;
-    this._title = data.title;
+    this._image = data.link;
+    this._title = data.name;
     this.isLiked = false;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
