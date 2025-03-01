@@ -23,7 +23,6 @@ function getCardsInfo() {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       // Instancia de cards iniciales
       const cardList = new Section(
         {
@@ -113,6 +112,5 @@ popupForm._getInputValues();
 const info = new UserInfo({
   nameSelector: "#profile-name",
   jobSelector: "#profile-job",
-  avatarSelector: ".profile__avatar",
 });
 info.getProfileInfo();
