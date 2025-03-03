@@ -6,8 +6,55 @@ export { handleCardClick, addNewCard };
 /* Funcion para eliminar cards */
 export default function deleteCard(event) {
   const cardToDelete = event.target.closest(".element");
+
   if (cardToDelete) {
     cardToDelete.remove();
+    // Se Encuentra en Id de cada card
+    fetch("https://around-api.es.tripleten-services.com/v1/cards", {
+      method: "GET",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const cardName =
+          cardToDelete.querySelector(".element__title").textContent; // Suponiendo que el título es único
+        const card = data.find((item) => item.name === cardName); // Busca en el array
+        if (card) {
+          console.log(card._id);
+
+          // Dentro de el otro fetch se agrega la solicitud DELETE
+          fetch(
+            `https://around-api.es.tripleten-services.com/v1/cards/${card._id}`,
+            {
+              method: "DELETE",
+              headers: {
+                authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((err) =>
+              console.error("Error al eliminar la tarjeta:", err)
+            );
+        }
+      });
+
+    /*fetch(`https://around-api.es.tripleten-services.com/v1/cards/${cardId}`, {
+      method: "GET",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.error("Error al eliminar la tarjeta:", err));*/
   }
 }
 document.addEventListener("click", function (event) {
@@ -22,28 +69,47 @@ function handleCardClick(image, title) {
   document.querySelector(".element__modal-title").textContent = title;
 }
 // Funcion para agregar nuevas cards
-const addNewCard = () => {
+const addNewCard = (event) => {
+  event.preventDefault();
+
   const newImageTitle = document.querySelector("#title").value;
   const imageURL = document.querySelector("#imageURL").value;
 
-  const newCardData = {
-    title: newImageTitle,
-    image: imageURL,
-  };
+  fetch("https://around-api.es.tripleten-services.com/v1/cards", {
+    method: "POST",
+    headers: {
+      authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: newImageTitle,
+      link: imageURL,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data); // Esto llega después, como debe ser
 
-  initialCards.push(newCardData);
-  const card = new Card(newCardData, "#template-selector");
+      // SOLO aquí se crea la card, cuando data ya está disponible
+      const card = new Card(
+        {
+          title: data.name, // Asegúrate de que estas propiedades existan
+          image: data.link,
+        },
+        "#template-selector"
+      );
 
-  const cardElement = card.generateCard();
-  document.querySelector(".element-list__item").prepend(cardElement);
+      const cardElement = card.generateCard();
+      document.querySelector(".element-list__item").prepend(cardElement);
 
-  profileAdd.closeDialog();
-  document.querySelector("#add-card-form").reset();
+      profileAdd.closeDialog();
+      document.querySelector("#add-card-form").reset();
 
-  // Restablecer la validación del formulario
-  formValidationImage.setEventListener();
-  formValidationImage.toggleSaveButton(
-    formValidationImage.inputList,
-    formValidationImage.buttonElement
-  );
+      formValidationImage.setEventListener();
+      formValidationImage.toggleSaveButton(
+        formValidationImage.inputList,
+        formValidationImage.buttonElement
+      );
+    })
+    .catch((err) => console.error("Error al agregar la tarjeta:", err));
 };

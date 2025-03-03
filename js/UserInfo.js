@@ -41,9 +41,7 @@ export default class UserInfo {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   }
 
   //API Calls
