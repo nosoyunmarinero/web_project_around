@@ -21,11 +21,14 @@ export default class FormValidator {
       ? this.showInputError(inputElement)
       : this.hideInputError(inputElement);
   }
+
   hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
+      // la linea del error
       return !inputElement.validity.valid;
     });
   }
+
   toggleSaveButton(inputList, buttonElement) {
     if (this.hasInvalidInput(inputList)) {
       buttonElement.disabled = true;

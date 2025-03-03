@@ -1,5 +1,4 @@
 import { Card } from "./Card.js";
-import { initialCards } from "./constants.js";
 import { profileAdd, formValidationImage } from "./script.js";
 export { handleCardClick, addNewCard };
 
@@ -43,20 +42,9 @@ export default function deleteCard(event) {
             );
         }
       });
-
-    /*fetch(`https://around-api.es.tripleten-services.com/v1/cards/${cardId}`, {
-      method: "GET",
-      headers: {
-        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => console.error("Error al eliminar la tarjeta:", err));*/
   }
 }
+//Event listener para eliiinar cards
 document.addEventListener("click", function (event) {
   if (event.target.matches(".element__button-delete *")) {
     deleteCard(event);
@@ -68,10 +56,9 @@ function handleCardClick(image, title) {
   document.querySelector(".element__modal-image").src = image;
   document.querySelector(".element__modal-title").textContent = title;
 }
-// Funcion para agregar nuevas cards
-const addNewCard = (event) => {
-  event.preventDefault();
 
+// Funcion para agregar nuevas cards
+const addNewCard = () => {
   const newImageTitle = document.querySelector("#title").value;
   const imageURL = document.querySelector("#imageURL").value;
 
@@ -88,16 +75,16 @@ const addNewCard = (event) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data); // Esto llega después, como debe ser
-
-      // SOLO aquí se crea la card, cuando data ya está disponible
       const card = new Card(
         {
-          title: data.name, // Asegúrate de que estas propiedades existan
-          image: data.link,
+          name: data.name,
+          link: data.link,
         },
-        "#template-selector"
+        "#template-selector",
+        () => console.log("Card clicked!")
       );
+
+      console.log("Card instance:", card);
 
       const cardElement = card.generateCard();
       document.querySelector(".element-list__item").prepend(cardElement);
@@ -111,5 +98,5 @@ const addNewCard = (event) => {
         formValidationImage.buttonElement
       );
     })
-    .catch((err) => console.error("Error al agregar la tarjeta:", err));
+    .catch((err) => console.error("Error en el POST:", err));
 };
