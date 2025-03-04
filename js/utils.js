@@ -18,8 +18,8 @@ export default function deleteCard(event) {
       .then((res) => res.json())
       .then((data) => {
         const cardName =
-          cardToDelete.querySelector(".element__title").textContent; // Suponiendo que el título es único
-        const card = data.find((item) => item.name === cardName); // Busca en el array
+          cardToDelete.querySelector(".element__title").textContent;
+        const card = data.find((item) => item.name === cardName);
         if (card) {
           console.log(card._id);
 
@@ -44,7 +44,7 @@ export default function deleteCard(event) {
       });
   }
 }
-//Event listener para eliiinar cards
+//Event listener para eliminar cards
 document.addEventListener("click", function (event) {
   if (event.target.matches(".element__button-delete *")) {
     deleteCard(event);

@@ -114,14 +114,3 @@ const info = new UserInfo({
   jobSelector: "#profile-job",
 });
 info.getProfileInfo();
-
-/* fetch("https://around-api.es.tripleten-services.com/v1/cards", {
-  headers: {
-    authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-    "Content-Type": "application/json",
-  },
-})
-  .then((res) => res.json())
-  .then((data) => {
-    data.forEach((card) => console.log(card._id)); // Recorre las cards y muestra cada id
-  }); */
