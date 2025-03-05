@@ -79,6 +79,7 @@ const addNewCard = () => {
         {
           name: data.name,
           link: data.link,
+          _id: data._id,
         },
         "#template-selector",
         () => console.log("Card clicked!")
@@ -87,6 +88,7 @@ const addNewCard = () => {
       console.log("Card instance:", card);
 
       const cardElement = card.generateCard();
+      cardElement.setAttribute("id", data._id);
       document.querySelector(".element-list__item").prepend(cardElement);
 
       profileAdd.closeDialog();

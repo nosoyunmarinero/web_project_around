@@ -3,6 +3,7 @@ export class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._image = data.link;
     this._title = data.name;
+    this._id = data._id;
     this.isLiked = false;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -25,11 +26,15 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-
+    //Title
     this._element.querySelector(".element__title").textContent = this._title;
+    //Image
     const imgElement = this._element.querySelector(".element__image");
     imgElement.src = this._image;
+    // Id
+    this._element.id = this._id;
 
+    //Like
     const likeButton = this._element.querySelector(".element__button-like");
     const likeIcon = this._element.querySelector(".element__like-button");
 
@@ -38,38 +43,8 @@ export class Card {
       this.toggleLike();
       if (this.isLiked) {
         likeIcon.src = "./images/heart-on.svg";
-        fetch("https://around-api.es.tripleten-services.com/v1/cards", {
-          method: "GET",
-          headers: {
-            authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            const card = data.find((element) => element.name === this._title);
-            console.log(card);
-
-            if (card.isLiked === false) {
-              fetch(
-                `https://around-api.es.tripleten-services.com/v1/cards/${card}`,
-                {
-                  method: "PUT",
-                  headers: {
-                    authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-                    "Content-Type": "aplication/json",
-                  },
-                  body: JSON.stringify({
-                    isLiked: true,
-                  }),
-                }
-              )
-                .then((res) => res.json())
-                .then((updatedData) => {
-                  console.log(updatedData);
-                });
-            }
-          });
+        const cardId = docume;
+        console.log(cardId);
       } else {
         likeIcon.src = "./images/heart.svg";
       }
