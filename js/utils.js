@@ -8,40 +8,20 @@ export default function deleteCard(event) {
 
   if (cardToDelete) {
     cardToDelete.remove();
-    // Se Encuentra en Id de cada card
-    fetch("https://around-api.es.tripleten-services.com/v1/cards", {
-      method: "GET",
-      headers: {
-        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-      },
-    })
+    fetch(
+      `https://around-api.es.tripleten-services.com/v1/cards/${cardToDelete.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
-        const cardName =
-          cardToDelete.querySelector(".element__title").textContent;
-        const card = data.find((item) => item.name === cardName);
-        if (card) {
-          console.log(card._id);
-
-          // Dentro de el otro fetch se agrega la solicitud DELETE
-          fetch(
-            `https://around-api.es.tripleten-services.com/v1/cards/${card._id}`,
-            {
-              method: "DELETE",
-              headers: {
-                authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-              },
-            }
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-            })
-            .catch((err) =>
-              console.error("Error al eliminar la tarjeta:", err)
-            );
-        }
-      });
+        console.log(data);
+      })
+      .catch((err) => console.error("Error al eliminar la tarjeta:", err));
   }
 }
 //Event listener para eliminar cards
