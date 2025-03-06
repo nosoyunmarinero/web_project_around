@@ -41,12 +41,43 @@ export class Card {
     //Like button
     likeButton.addEventListener("click", () => {
       this.toggleLike();
+
       if (this.isLiked) {
-        likeIcon.src = "./images/heart-on.svg";
-        const cardId = docume;
-        console.log(cardId);
+        fetch(
+          `https://around-api.es.tripleten-services.com/v1/cards/${this._id}/likes`,
+          {
+            method: "PUT",
+            headers: {
+              authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              isLiked: true,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.isLiked);
+          })
+          .catch((err) =>
+            console.error("Error al dar like a la tarjeta:", err)
+          );
       } else {
-        likeIcon.src = "./images/heart.svg";
+        fetch(
+          `https://around-api.es.tripleten-services.com/v1/cards/${this._id}/likes`,
+          {
+            method: "DELETE",
+            headers: { authorization: "354781f2-b486-4ab1-9379-468b53f9329e" },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.isLiked);
+          })
+          .catch((err) =>
+            console.error("Error al quitar like a la tarjeta:", err)
+          );
       }
     });
 

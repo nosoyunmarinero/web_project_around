@@ -20,6 +20,7 @@ export default function deleteCard(event) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        console.log("Tarjeta eliminada", cardToDelete.id);
       })
       .catch((err) => console.error("Error al eliminar la tarjeta:", err));
   }
