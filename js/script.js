@@ -114,3 +114,35 @@ const info = new UserInfo({
   jobSelector: "#profile-job",
 });
 info.getProfileInfo();
+
+//Actualizar foto heart
+const getLikeStatus = () => {
+  fetch("https://around-api.es.tripleten-services.com/v1/cards", {
+    method: "GET",
+    headers: {
+      authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      const likeIcon = document.querySelector(".element__like-button");
+      console.log(data[0].isLiked); // Ver qué datos llegan
+      if (data[0].isLiked) {
+        console.log("liked");
+        likeIcon.src = "./images/heart-on.svg";
+      } else {
+        console.log("not liked");
+        const likeIcon = document.querySelector(".element__like-button");
+        likeIcon.src = "./images/heart.svg";
+      }
+    })
+    .catch((err) => console.error(err));
+};
+
+getLikeStatus();

@@ -12,6 +12,12 @@ export class Card {
   //Cambiar like
   toggleLike() {
     this.isLiked = !this.isLiked;
+    const likeIcon = this._element.querySelector(".element__like-button");
+    if (this.isLiked) {
+      likeIcon.src = "./images/heart-on.svg";
+    } else {
+      likeIcon.src = "./images/heart.svg";
+    }
   }
 
   _getTemplate() {
