@@ -28,7 +28,16 @@
       <main class="content">
         <!--Profile-->
         <section class="profile" id="profile">
-          <img src="" alt="Imagen de perfil." class="profile__avatar" />
+          <div class="profile__avatar-container">
+            <img src="" alt="Imagen de perfil." class="profile__avatar" />
+            <button class="profile__avatar-edit-button">
+              <img
+                src="./images/edit-button.svg"
+                alt="Editar avatar"
+                class="profile__avatar-edit-icon"
+              />
+            </button>
+          </div>
           <div class="profile__info">
             <h2 class="profile__name" id="profile-name"></h2>
             <h3 class="profile__about" id="profile-job"></h3>
@@ -39,6 +48,36 @@
           <button class="profile__add-button" id="add-button-open">+</button>
         </section>
 
+        <!--Popup para cambiar AVATAR de perfil-->
+        <dialog class="dialog-general" id="modal-avatar">
+          <button class="profile__close-button">
+            <img
+              src="./images/Close-Icon.svg"
+              alt="Cerrar"
+              id="avatar-button-close"
+              class="profile__close-icon"
+            />
+          </button>
+          <form class="profile__edit-form" id="avatar-form" novalidate>
+            <header class="profile__edit-form-header">
+              Cambiar foto de perfil
+            </header>
+            <input
+              type="url"
+              class="profile__edit-form-input profile__edit-form-input_name"
+              placeholder="https://ejemplo.com/imagen-ejemplo.jpg"
+              id="avatarURL"
+              required
+            />
+            <span class="form__input-error" id="avatarURL-error"></span>
+            <button
+              id="save-button-avatar"
+              class="profile__edit-form-button profile__edit-form-button_save"
+            >
+              Guardar
+            </button>
+          </form>
+        </dialog>
         <!--Dialog Form EDITAR PERFIL-->
         <dialog id="modal-edit" class="dialog-general">
           <button class="profile__close-button">
@@ -141,7 +180,7 @@
         </dialog>
         <!--Footer-->
         <footer>
-          <p class="footer">© 2021 Around The U.S.</p>
+          <p class="footer">© 2025 Around The U.S.</p>
         </footer>
       </main>
       <!--Template-->

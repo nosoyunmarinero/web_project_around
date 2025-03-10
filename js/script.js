@@ -62,6 +62,14 @@ const profileAdd = new Popup({
   closeButtonElement: "#add-button-close",
 });
 
+//Instancia para abrir Popup Editar imagen
+const profileEditImage = new Popup({
+  dialogID: "#modal-avatar",
+  formID: "#avatar-form",
+  openButtonElement: ".profile__avatar-edit-button",
+  closeButtonElement: "#avatar-button-close",
+});
+
 // Instancia para abrir imagenes
 const openImage = new PopupWithImage({
   openButtonElement: ".element__button-image",
@@ -69,8 +77,7 @@ const openImage = new PopupWithImage({
   dialogID: "#modal-image",
 });
 
-/* Instancias de FormValidator */
-
+/* Instancias de FormValidator editar perfil*/
 const formValidationProfile = new FormValidator("#profile-form", {
   inputSelector: ".profile__edit-form-input",
   inputErrorClass: "form__input_type_error",
@@ -83,7 +90,7 @@ formValidationProfile.toggleSaveButton(
   formValidationProfile.inputList,
   formValidationProfile.buttonElement
 );
-
+// Form Validator para subir imagen
 const formValidationImage = new FormValidator("#modal-add", {
   inputSelector: ".profile__edit-form-input",
   inputErrorClass: "#title-error",
@@ -95,6 +102,20 @@ formValidationImage.enableValidation();
 formValidationImage.toggleSaveButton(
   formValidationImage.inputList,
   formValidationImage.buttonElement
+);
+
+//Form validator para cambiar imagen del perfil
+const formValidationAvatar = new FormValidator("#avatar-form", {
+  inputSelector: ".profile__edit-form-input",
+  inputErrorClass: "#title-error",
+  errorClass: "form__input-error_active",
+  buttonSelector: ".profile__edit-form-button",
+});
+formValidationAvatar.enableValidation();
+
+formValidationAvatar.toggleSaveButton(
+  formValidationAvatar.inputList,
+  formValidationAvatar.buttonElement
 );
 
 // Instancia pop up with form
