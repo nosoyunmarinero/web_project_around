@@ -116,15 +116,16 @@
 @media screen and (max-width: 880px) {
   .profile {
     width: 282px;
+    height: 286px;
     padding-top: 42px;
     flex-direction: column;
     align-items: center;
     align-self: center;
+    padding: 0;
   }
 
   .profile__info {
-    margin-left: 0;
-    margin-bottom: 36px;
+    margin: 0;
   }
 
   .profile__name {
@@ -135,6 +136,7 @@
   .profile__about {
     font-size: 14px;
     text-align: center;
+    padding-bottom: 36px;
   }
 
   .profile__add-button {
@@ -142,33 +144,8 @@
   }
 }
 
-.header {
-  width: 882px;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-}
-
-.header__logo {
-  width: 173px;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-}
-
 @media screen and (max-width: 590px) {
-  .profile__about {
-    padding-bottom: 36px;
-  }
 }
 
 @media screen and (max-width: 880px) {
-  .header {
-    width: 282px;
-  }
-
-  .header__logo {
-    width: 126px;
-    height: 24px;
-    margin-bottom: 32px;
-  }
 }
