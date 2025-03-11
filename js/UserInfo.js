@@ -1,3 +1,4 @@
+import FormValidator from "./FormValidator.js";
 export default class UserInfo {
   constructor(infoSelectors) {
     this._infoSelectors = infoSelectors;
@@ -27,6 +28,13 @@ export default class UserInfo {
     nameElement.textContent = newUserData.name;
     jobElement.textContent = newUserData.job;
 
+    if (newUserData.avatar) {
+      const avatarElement = document.querySelector(
+        this._infoSelectors.avatarSelector
+      );
+      avatarElement.src = newUserData.avatar;
+    }
+
     //Actualizacion del servidor
 
     fetch("https://around-api.es.tripleten-services.com/v1/users/me", {
@@ -45,7 +53,7 @@ export default class UserInfo {
   }
 
   //API Calls
-  getProfileInfo() {
+  getProfileInfo(formValidator = null) {
     fetch("https://around-api.es.tripleten-services.com/v1/users/me", {
       headers: {
         authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
@@ -53,11 +61,56 @@ export default class UserInfo {
     })
       .then((res) => res.json())
       .then((data) => {
+        // Actualizar la información del perfil en la página
         this.setUserInfo({
           name: data.name,
           job: data.about,
           avatar: data.avatar,
         });
+
+        // Actualizar los valores del formulario si existen los elementos
+        const inputName = document.querySelector("#name");
+        const inputJob = document.querySelector("#job");
+
+        if (inputName && inputJob) {
+          inputName.value = data.name;
+          inputJob.value = data.about;
+
+          // Si se proporcionó un validador, usarlo en lugar de crear uno nuevo
+          if (formValidator) {
+            formValidator.toggleSaveButton(
+              formValidator.inputList,
+              formValidator.buttonElement
+            );
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Error al obtener información del perfil:", error);
+      });
+  }
+
+  setAvatar(newAvatarData) {
+    const avatarElement = document.querySelector(
+      this._infoSelectors.avatarSelector
+    );
+
+    avatarElement.src = newAvatarData.avatarURL;
+
+    //Actualizacion del servidor
+    fetch("https://around-api.es.tripleten-services.com/v1/users/me/avatar", {
+      method: "PATCH",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: newAvatarData.avatarURL,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
       });
   }
 }

@@ -62,11 +62,11 @@ const profileAdd = new Popup({
   closeButtonElement: "#add-button-close",
 });
 
-//Instancia para abrir Popup Editar imagen
+//Instancia para abrir Popup Editar Avatar
 const profileEditImage = new Popup({
   dialogID: "#modal-avatar",
   formID: "#avatar-form",
-  openButtonElement: ".profile__avatar-edit-button",
+  openButtonElement: "#avatar-edit-button",
   closeButtonElement: "#avatar-button-close",
 });
 
@@ -118,20 +118,30 @@ formValidationAvatar.toggleSaveButton(
   formValidationAvatar.buttonElement
 );
 
-// Instancia pop up with form
-
-const popupForm = new PopUpWithForm(
+// Instancia pop up with form para editar perfil
+const profilePopupForm = new PopUpWithForm(
   (inputValues) => {
     info.setUserInfo(inputValues);
   },
   "#modal-edit",
   { dialogID: "#modal-edit" }
 );
-popupForm._getInputValues();
+profilePopupForm._getInputValues();
+
+//Instancia para popup con avatar para cambiar avatar
+const avatarPopupForm = new PopUpWithForm(
+  (inputValues) => {
+    info.setAvatar(inputValues);
+  },
+  "#modal-avatar",
+  { dialogID: "#modal-avatar" }
+);
+avatarPopupForm._getInputValues();
 
 // instancia user info
 const info = new UserInfo({
   nameSelector: "#profile-name",
   jobSelector: "#profile-job",
+  avatarSelector: ".profile__avatar",
 });
-info.getProfileInfo();
+info.getProfileInfo(formValidationProfile);

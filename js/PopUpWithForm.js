@@ -8,7 +8,6 @@ export default class PopUpWithForm extends Popup {
   }
 
   _getInputValues() {
-    //console.log("this._popUpSelector", this._popUpSelector);
     const inputValues = {};
     const form = document
       .querySelector(this._popUpSelector)
@@ -20,15 +19,7 @@ export default class PopUpWithForm extends Popup {
       inputValues[input.id] = input.value;
     });
     // console.log("input values", inputValues);
-
     return inputValues;
-  }
-
-  closeDialog() {
-    super.closeDialog();
-    const form = document
-      .querySelector(this._popUpSelector)
-      .querySelector("form");
   }
 
   setEventListeners() {
