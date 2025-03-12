@@ -1,6 +1,7 @@
 import { Card } from "./Card.js";
 import { profileAdd, formValidationImage } from "./script.js";
 export { handleCardClick, addNewCard };
+import Popup from "./Popup.js";
 
 /* Funcion para eliminar cards */
 export default function deleteCard(event) {
@@ -26,9 +27,11 @@ export default function deleteCard(event) {
   }
 }
 //Event listener para eliminar cards
+const deleteDialog = document.querySelector("#modal-delete");
 document.addEventListener("click", function (event) {
   if (event.target.matches(".element__button-delete *")) {
-    deleteCard(event);
+    console.log("Botón de eliminar clicado");
+    deleteDialog.show();
   }
 });
 

@@ -75,11 +75,23 @@
   border: 1px solid #c4c4c4;
   align-self: center;
   margin-top: 48px;
-  width: calc(100% - 72px); /* Mismo ancho que el input */
+  width: calc(100% - 72px);
   box-sizing: border-box;
 }
 
 .profile__edit-form-button_save:hover {
+  opacity: 0.8;
+}
+
+.profile__delete-button {
+  display: block;
+  margin: 0 auto 36px auto;
+  width: calc(100% - 72px);
+  box-sizing: border-box;
+  background-color: #000000;
+  color: white;
+}
+.profile__delete-button:hover {
   opacity: 0.8;
 }
 
