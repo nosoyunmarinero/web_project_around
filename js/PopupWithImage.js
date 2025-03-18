@@ -43,5 +43,11 @@ export default class PopupWithImage extends Popup {
         this.closeDialog(event);
       }
     });
-  }
-}
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        this.closeDialog();
+      }
+    });
+  } // cierra setEventListeners
+} //cierra clase

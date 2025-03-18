@@ -5,8 +5,9 @@ import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopUpWithForm from "./PopUpWithForm.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./UserInfo.js";
-import deleteCard from "./utils.js";
+// import deleteCard from "./utils.js";
 import { handleCardClick, addNewCard } from "./utils.js";
 // import { initialCards } from "./constants.js";
 export { profileAdd, formValidationImage };
@@ -73,8 +74,16 @@ const profileEditImage = new Popup({
 // Instancia para abrir imagenes
 const openImage = new PopupWithImage({
   openButtonElement: ".element__button-image",
-  closeButtonElement: ".element__close-button",
+  closeButtonElement: "#modal-image-close",
   dialogID: "#modal-image",
+});
+
+// Instancia para eliminar cards
+const deleteCard = new PopupWithConfirmation({
+  dialogID: "#modal-delete",
+  openButtonElement: "#delete-image-btn",
+  closeButtonElement: "#confirmation-dialog-close",
+  confirmButtonElement: ".profile__delete-button",
 });
 
 /* Instancias de FormValidator editar perfil*/

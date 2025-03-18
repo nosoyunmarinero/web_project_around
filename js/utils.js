@@ -3,7 +3,7 @@ import { profileAdd, formValidationImage } from "./script.js";
 export { handleCardClick, addNewCard };
 import Popup from "./Popup.js";
 
-/* Funcion para eliminar cards */
+/* Funcion para eliminar cards
 export default function deleteCard(event) {
   const cardToDelete = event.target.closest(".element");
 
@@ -33,7 +33,7 @@ document.addEventListener("click", function (event) {
     console.log("Botón de eliminar clicado");
     deleteDialog.show();
   }
-});
+}); */
 
 //Funcion handleCardClick para la clase card
 function handleCardClick(image, title) {
