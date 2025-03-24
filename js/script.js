@@ -7,45 +7,32 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopUpWithForm from "./PopUpWithForm.js";
 import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./UserInfo.js";
-// import deleteCard from "./utils.js";
-import { handleCardClick, addNewCard } from "./utils.js";
-// import { initialCards } from "./constants.js";
-export { profileAdd, formValidationImage };
+import { addNewCard } from "./utils.js";
+export { profileAdd, formValidationImage, apiNewCard };
+import Api from "./Api.js";
 
 /* Instancias */
 
-// API Cards
-
-function getCardsInfo() {
-  fetch("https://around-api.es.tripleten-services.com/v1/cards", {
-    headers: {
-      authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      // Instancia de cards iniciales
-      const cardList = new Section(
-        {
-          item: data,
-          renderer: (item) => {
-            const card = new Card(item, "#template-selector", handleCardClick);
-            const cardElement = card.generateCard();
-            cardList.addItem(cardElement);
-          },
-        },
-        ".element-list__item"
-      );
-      cardList.renderItems();
-    });
-}
-
-getCardsInfo();
+// Instancia de cards iniciales
+const apiInitialCards = new Api({
+  baseUrl: "https://around-api.es.tripleten-services.com/v1/",
+  headers: {
+    authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+  },
+});
+apiInitialCards.getInitialCards();
 
 // Instancia para agregar nuevas cards
 const imageForm = document.querySelector("#add-card-form");
 imageForm.addEventListener("submit", addNewCard);
 
+const apiNewCard = new Api({
+  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  headers: {
+    authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+    "Content-Type": "application/json",
+  },
+});
 // Instancia para abrir Popup editar perfil
 const profileEdit = new Popup({
   dialogID: "#modal-edit",
@@ -74,7 +61,7 @@ const profileEditImage = new Popup({
 // Instancia para abrir imagenes
 const openImage = new PopupWithImage({
   openButtonElement: ".element__button-image",
-  closeButtonElement: "#modal-image-close",
+  closeButtonElement: "#dialog-close-button",
   dialogID: "#modal-image",
 });
 

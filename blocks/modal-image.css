@@ -12,7 +12,8 @@
 }
 
 .element__modal-image {
-  max-width: 400px;
+  max-width: 816px;
+  max-height: 540px;
 }
 .element__modal-title {
   color: white;
