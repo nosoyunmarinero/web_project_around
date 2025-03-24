@@ -6,7 +6,13 @@ import PopUpWithForm from "./PopUpWithForm.js";
 import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import UserInfo from "./UserInfo.js";
 import { addNewCard } from "./utils.js";
-export { profileAdd, formValidationImage, apiNewCard };
+export {
+  profileAdd,
+  formValidationImage,
+  apiNewCard,
+  profileEdit,
+  profileEditImage,
+};
 import Api from "./Api.js";
 
 /* Instancias */

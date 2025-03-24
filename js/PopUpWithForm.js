@@ -32,7 +32,6 @@ export default class PopUpWithForm extends Popup {
         event.preventDefault();
         const inputValues = this._getInputValues();
         this._submitCallback(inputValues);
-        this.closeDialog();
       });
     });
   }

@@ -72,7 +72,9 @@ export default class Api {
         name: newUserData.name,
         about: newUserData.job,
       }),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .finally(() => {});
   }
 
   setAvatar(newAvatarData) {
@@ -87,9 +89,7 @@ export default class Api {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   }
 
   deleteCard(clickedButtonID) {
@@ -103,6 +103,7 @@ export default class Api {
       .then((data) => {
         console.log(data);
         console.log("Tarjeta eliminada", clickedButtonID);
+        clickedButtonID.remove();
       })
       .catch((err) => console.log("Error al eliminar la tarjeta:", err));
   }
@@ -118,5 +119,15 @@ export default class Api {
       },
       body,
     }).then((res) => res.json());
+  }
+
+  //Funciones de carga
+
+  renderTextLoading(isLoading, saveButtonElement) {
+    if (isLoading) {
+      saveButtonElement.textContent = "Guardando...";
+    } else {
+      saveButtonElement.textContent = "Guardar";
+    }
   }
 }

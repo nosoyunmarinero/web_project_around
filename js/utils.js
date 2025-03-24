@@ -12,10 +12,12 @@ function handleCardClick(image, title) {
 const addNewCard = () => {
   const newImageTitle = document.querySelector("#title").value;
   const imageURL = document.querySelector("#imageURL").value;
+  const saveButtonElement = document.querySelector("#save-button-add");
 
   apiNewCard._options.name = newImageTitle;
   apiNewCard._options.link = imageURL;
 
+  saveButtonElement.textContent = "Creando...";
   apiNewCard
     .addNewCard()
     .then((data) => {
@@ -33,14 +35,14 @@ const addNewCard = () => {
       cardElement.setAttribute("id", data._id);
       document.querySelector(".element-list__item").prepend(cardElement);
 
-      profileAdd.closeDialog();
-      document.querySelector("#add-card-form").reset();
-
       formValidationImage.setEventListener();
       formValidationImage.toggleSaveButton(
         formValidationImage.inputList,
         formValidationImage.buttonElement
       );
+      saveButtonElement.textContent = "Crear";
+      profileAdd.closeDialog();
+      document.querySelector("#add-card-form").reset();
     })
     .catch((err) => console.error("Error en el POST:", err));
 };

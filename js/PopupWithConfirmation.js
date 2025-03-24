@@ -1,9 +1,17 @@
+import Api from "./Api.js";
 import Popup from "./Popup.js";
 export default class PopupWithConfirmation extends Popup {
   constructor(selectors) {
     super(selectors);
     this._clickedButton = null;
     this._clickedButtonID = null;
+
+    this._api = new Api({
+      baseUrl: "https://around-api.es.tripleten-services.com/v1/",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+      },
+    });
   }
 
   openDialog(e) {
@@ -44,7 +52,8 @@ export default class PopupWithConfirmation extends Popup {
     document
       .querySelector(this._selectors.confirmButtonElement)
       .addEventListener("click", () => {
-        this.deleteCard();
+        this._api.deleteCard(this._clickedButtonID);
+        this._clickedButton.remove();
         this.closeDialog();
       });
   }

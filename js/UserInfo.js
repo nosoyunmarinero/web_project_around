@@ -1,4 +1,5 @@
 import Api from "./Api.js";
+import { profileEdit, profileEditImage } from "./script.js";
 export default class UserInfo {
   constructor(infoSelectors) {
     this._infoSelectors = infoSelectors;
@@ -33,6 +34,7 @@ export default class UserInfo {
       this._infoSelectors.nameSelector
     );
     const jobElement = document.querySelector(this._infoSelectors.jobSelector);
+    const saveButtonElement = document.querySelector("#save-button");
 
     nameElement.textContent = newUserData.name;
     jobElement.textContent = newUserData.job;
@@ -44,8 +46,15 @@ export default class UserInfo {
       avatarElement.src = newUserData.avatar;
     }
 
-    //Actualizacion del servidor
-    this._api.updateUserInfo(newUserData);
+    // Mostrar estado de carga en el botón
+    this._api.renderTextLoading(true, saveButtonElement);
+
+    // Actualización del servidor
+    this._api.updateUserInfo(newUserData).finally(() => {
+      // Restaurar el botón después de la actualización
+      this._api.renderTextLoading(false, saveButtonElement);
+      profileEdit.closeDialog();
+    });
   }
 
   getProfileInfo(formValidator = null) {
@@ -90,9 +99,16 @@ export default class UserInfo {
       this._infoSelectors.avatarSelector
     );
 
-    avatarElement.src = newAvatarData.avatarURL;
+    const saveButtonElement = document.querySelector("#save-button-avatar");
 
-    //Actualizacion del servidor
-    this._api.setAvatar(newAvatarData);
+    this._api.renderTextLoading(true, saveButtonElement);
+
+    // Agregar un retraso para que el texto "Guardando" sea visible por más tiempo
+    setTimeout(() => {
+      avatarElement.src = newAvatarData.avatarURL;
+      this._api.setAvatar(newAvatarData);
+      this._api.renderTextLoading(false, saveButtonElement);
+      profileEditImage.closeDialog();
+    }, 2000);
   }
 }
