@@ -49,4 +49,74 @@ export default class Api {
       return res.json();
     });
   }
+
+  getUserInfo() {
+    return fetch(`${this._options.baseUrl}/users/me`, {
+      headers: {
+        authorization: this._options.headers.authorization,
+      },
+    }).then((res) => {
+      if (!res.ok) throw new Error(`Error: ${res.status}`);
+      return res.json();
+    });
+  }
+
+  updateUserInfo(newUserData) {
+    return fetch(`${this._options.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._options.headers.authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: newUserData.name,
+        about: newUserData.job,
+      }),
+    }).then((res) => res.json());
+  }
+
+  setAvatar(newAvatarData) {
+    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._options.headers.authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: newAvatarData.avatarURL,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  deleteCard(clickedButtonID) {
+    return fetch(`${this._options.baseUrl}/cards/${clickedButtonID}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._options.headers.authorization,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log("Tarjeta eliminada", clickedButtonID);
+      })
+      .catch((err) => console.log("Error al eliminar la tarjeta:", err));
+  }
+
+  changeLikeCardStatus(clickedButtonID, isLiked) {
+    const method = isLiked ? "PUT" : "DELETE";
+    const body = isLiked ? JSON.stringify({ isLiked: true }) : null;
+    return fetch(`${this._options.baseUrl}/cards/${clickedButtonID}/likes`, {
+      method,
+      headers: {
+        authorization: this._options.headers.authorization,
+        "Content-Type": "application/json",
+      },
+      body,
+    }).then((res) => res.json());
+  }
 }

@@ -1,7 +1,16 @@
-import FormValidator from "./FormValidator.js";
+import Api from "./Api.js";
 export default class UserInfo {
   constructor(infoSelectors) {
     this._infoSelectors = infoSelectors;
+
+    // Intancia de la API
+    this._api = new Api({
+      baseUrl: "https://around-api.es.tripleten-services.com/v1",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   getUserInfo() {
@@ -36,30 +45,12 @@ export default class UserInfo {
     }
 
     //Actualizacion del servidor
-
-    fetch("https://around-api.es.tripleten-services.com/v1/users/me", {
-      method: "PATCH",
-      headers: {
-        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: newUserData.name,
-        about: newUserData.job,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {});
+    this._api.updateUserInfo(newUserData);
   }
 
-  //API Calls
   getProfileInfo(formValidator = null) {
-    fetch("https://around-api.es.tripleten-services.com/v1/users/me", {
-      headers: {
-        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-      },
-    })
-      .then((res) => res.json())
+    this._api
+      .getUserInfo()
       .then((data) => {
         // Actualizar la información del perfil en la página
         this.setUserInfo({
@@ -68,26 +59,30 @@ export default class UserInfo {
           avatar: data.avatar,
         });
 
-        // Actualizar los valores del formulario si existen los elementos
-        const inputName = document.querySelector("#name");
-        const inputJob = document.querySelector("#job");
-
-        if (inputName && inputJob) {
-          inputName.value = data.name;
-          inputJob.value = data.about;
-
-          // Si se proporcionó un validador, usarlo en lugar de crear uno nuevo
-          if (formValidator) {
-            formValidator.toggleSaveButton(
-              formValidator.inputList,
-              formValidator.buttonElement
-            );
-          }
-        }
+        // Actualizar los valores del formulario con la información del perfil
+        this._updateFormValues(data, formValidator);
       })
       .catch((error) => {
         console.error("Error al obtener información del perfil:", error);
       });
+  }
+
+  _updateFormValues(data, formValidator) {
+    const inputName = document.querySelector("#name");
+    const inputJob = document.querySelector("#job");
+
+    if (inputName && inputJob) {
+      inputName.value = data.name;
+      inputJob.value = data.about;
+
+      // Si se proporcionó un validador, usarlo en lugar de crear uno nuevo
+      if (formValidator) {
+        formValidator.toggleSaveButton(
+          formValidator.inputList,
+          formValidator.buttonElement
+        );
+      }
+    }
   }
 
   setAvatar(newAvatarData) {
@@ -98,19 +93,6 @@ export default class UserInfo {
     avatarElement.src = newAvatarData.avatarURL;
 
     //Actualizacion del servidor
-    fetch("https://around-api.es.tripleten-services.com/v1/users/me/avatar", {
-      method: "PATCH",
-      headers: {
-        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        avatar: newAvatarData.avatarURL,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    this._api.setAvatar(newAvatarData);
   }
 }

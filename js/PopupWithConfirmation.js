@@ -19,25 +19,6 @@ export default class PopupWithConfirmation extends Popup {
     super.closeDialog();
   }
 
-  deleteCard() {
-    this._clickedButton.remove();
-    fetch(
-      `https://around-api.es.tripleten-services.com/v1/cards/${this._clickedButtonID}`,
-      {
-        method: "DELETE",
-        headers: {
-          authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        console.log("Tarjeta eliminada", this._clickedButtonID);
-      })
-      .catch((err) => console.error("Error al eliminar la tarjeta:", err));
-  }
-
   setEventListeners() {
     // Abrir dialog confirmacion
     document.addEventListener("click", (e) => {

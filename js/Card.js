@@ -1,3 +1,4 @@
+import Api from "./Api.js";
 export class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._image = data.link;
@@ -6,11 +7,25 @@ export class Card {
     this.isLiked = data.isLiked;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._clickedButton = null;
+    this._clickedButtonID = null;
+
+    this._api = new Api({
+      baseUrl: "https://around-api.es.tripleten-services.com/v1",
+      headers: {
+        authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   // Cambiar like
   toggleLike() {
     this.isLiked = !this.isLiked;
+  }
+  deleteCard() {
+    this._clickedButton.remove();
+    this._api.deleteCard(this._clickedButtonID);
   }
 
   _getTemplate() {
@@ -44,25 +59,16 @@ export class Card {
     likeButton.addEventListener("click", () => {
       this.toggleLike();
 
-      const method = this.isLiked ? "PUT" : "DELETE";
-      const body = this.isLiked ? JSON.stringify({ isLiked: true }) : null;
-
-      fetch(
-        `https://around-api.es.tripleten-services.com/v1/cards/${this._id}/likes`,
-        {
-          method,
-          headers: {
-            authorization: "354781f2-b486-4ab1-9379-468b53f9329e",
-            "Content-Type": "application/json",
-          },
-          body,
-        }
-      )
-        .then((res) => res.json())
+      this._api
+        .changeLikeCardStatus(this._id, this.isLiked)
         .then((data) => {
           this.isLiked = data.isLiked;
           this.updateLikeButtonState(likeIcon);
-          console.log(data.isLiked);
+          if (data.isLiked === true) {
+            console.log("Se likeo a la tarjeta ");
+          } else {
+            console.log("Se deslikeo la tarjeta");
+          }
         })
         .catch((err) => {
           console.error(
