@@ -83,9 +83,9 @@ export class Card {
 
   updateLikeButtonState(likeIcon) {
     if (this.isLiked) {
-      likeIcon.src = "./images/heart-on.svg";
+      likeIcon.src = "../images/heart-on.svg";
     } else {
-      likeIcon.src = "./images/heart.svg";
+      likeIcon.src = "../images/heart.svg";
     }
   }
 }
